@@ -78,8 +78,8 @@
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                   <li role="menuitem"><a class="dropdown-item" [routerLink]="['edit', item.id]">Edit</a></li>
-                  <li role="menuitem"><a  class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
-                  <!-- <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="amountModal.show()">Add Payment</a></li> -->
+                  <li *ngIf="currentUser.role != 3"><a  class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
+                  <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="amountModal.show()">Add Payment</a></li>
                 </ul>
               </div>
             </td>

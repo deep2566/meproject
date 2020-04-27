@@ -9,7 +9,7 @@ export const navItems: INavData[] = [
 
   {
     name: 'Collections',
-    url: '/collections',
+    url: '/tables/datatable',
     icon: 'fa fa-balance-scale',
   },
 
@@ -20,39 +20,22 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Manage Profile',
+        url: '/apps/invoicing',
         icon: 'icon-speechs',
         children: [
           {
             name: 'Collector Profile',
-            url: '/collector',
             icon: 'icon-speechs'
             
           },
           {
             name: 'Client Profile',
-            url: '/clients',
             icon: 'icon-speechs'
             
           }
         ]
       },
-      {
-        name: 'Manage Users',
-        url: '/users',
-        icon: 'icon-user',
-      },
 
-      {
-        name: 'Manage Actions',
-        url: '/action-type',
-        children: [
-          {
-            name: 'Action Type',
-            url: '/action-type',
-            
-          }
-        ]
-      }
 
 
     ]
@@ -60,16 +43,14 @@ export const navItems: INavData[] = [
   {
     name: 'Invoices',
     icon: 'fa fa-file-picture-o',
-    url: '/invoice',
+      url: '/tables/datatable',
     children: [
       {
         name: 'Client Comission',
-        url: '/client-comission',
         icon: 'icon-stara'
       },
       {
         name: 'Collector Comission',
-        url: '/collector-comission',
         icon: 'icon-stara'
       }
     ]

@@ -1,5 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
+import { collectorNavItems } from '../../_collectorNav';
 import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
@@ -9,12 +10,22 @@ import { AuthenticationService } from '../../_services/authentication.service';
 export class DefaultLayoutComponent implements OnInit {
   constructor(private AuthenticationService : AuthenticationService) { }
 
+	public sidebarMinimized = false;
+	public navItems = {};
+	
   ngOnInit() {
     console.log('test');
     this.AuthenticationService.checklogin();
+	var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+	if(currentUser.role == 1){
+		this.navItems = navItems;
+	}
+	if(currentUser.role == 3){
+		this.navItems = collectorNavItems;
+	}
+	console.log('login-user', JSON.parse(localStorage.getItem('currentUser')));
   }
-  public sidebarMinimized = false;
-  public navItems = navItems;
+  
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;

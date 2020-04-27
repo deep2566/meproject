@@ -6,25 +6,29 @@ import { throwError, from } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-export interface UserData {
+export interface ActionData {
+  id: number;
   name: string;
-  email: string;
-  regDate: string;
-  city: string;
-  age: number;
+  level: number;
+  parent_level: number;
+  status: number;
 }
 
-export interface TableData extends Array<UserData> {}
+export interface TableData extends Array<ActionData> {}
 
-@Injectable()
-export class CollectionService {
-  dataUrl     = environment.apiUrl+'collections';
-  uri         = environment.apiUrl+'collection';
+@Injectable({
+  providedIn: 'root'
+})
+export class ActionTypeService {
+
+  dataUrl     = environment.apiUrl+'actions';
+  uri         = environment.apiUrl+'actions';
   actionurl   = environment.apiUrl+'actions';
   baseurl     = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+  
   getData() {
     return this.http.get<TableData>(this.dataUrl)
       .pipe(
@@ -34,7 +38,7 @@ export class CollectionService {
   }
 
   getAction() {
-    return this.http.get(this.actionurl)
+    return this.http.get(this.actionurl+'/level1')
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -42,15 +46,7 @@ export class CollectionService {
   }
 
 
-  addPhone(phone,collection_id){
-    const obj = {
-      phone,collection_id
-    };
-    return this.http.post(`${this.uri}/addphone`, obj).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError) // then handle the error
-    );
-  }
+  
 
   addAction(level_one,level_two,level_three,notes,collection_id){
     const obj = {
@@ -62,42 +58,15 @@ export class CollectionService {
     );
   }
 
-  addAttach(formData){
-    return this.http.post(`${this.uri}/addattach`, formData);
-  }
 
-  downloadAttach(id){
-    return this.http.get(`${this.uri}/check-attachment/`+id);
-  }
 
-  getClients(){
-    return this.http.get(`${this.baseurl}clients`);
-  }
 
-  getCollectors(){
-    return this.http.get(`${this.baseurl}collectors`);
-  }
+  
 
-  add(data) {
-    return this.http.post(`${this.uri}/add`, data);
-  }
-
-  edit(id) {
-    return this
-            .http
-            .get(`${this.uri}/edit/${id}`);
-  }
-
-  update(data,id) {
-     return this
-        .http
-        .post(`${this.uri}/update/${id}`,data);
-  }
-
-  delete(id) {
+  delete(id, type) {
     return this
               .http
-              .get(`${this.uri}/delete/${id}`);
+              .get(`${this.dataUrl}/delete/${id}/${type}`);
   }
 
   getComissions(id){
@@ -123,4 +92,5 @@ export class CollectionService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+  
 }

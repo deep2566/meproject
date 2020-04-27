@@ -38,7 +38,7 @@ export class CollectionComponent {
   public level_two ='';
   public level_three ='';
   public item:any;
-
+  public currentUser:any;
   public showSpinnner = true;
   form: FormGroup;
   amountaddForm: FormGroup;
@@ -74,8 +74,11 @@ export class CollectionComponent {
       this.phoneaddForm = this.fb.group({
         phone: ['', Validators.required ]
       })
+	  
+	  this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
+  
   public toInt(num: string) {
     return +num;
   }
@@ -201,9 +204,32 @@ export class CollectionComponent {
     window.location.href = environment.apiUrl+'download-collection';
   }
 
+  getCollectionsData(){
+    this.CollectionService.getData()
+      .subscribe(
+        (data) => {
+          setTimeout(() => {
+            this.showSpinnner =false;
+            this.data = [...data];
+            }, 100);
+        }, // success path
+        error => this.error = error // error path
+      );
+  }
+
   addAmount(data,id){
-    console.log(data);
-    this.amountaddForm.reset();
+    if(confirm('Are you sure to add ?')){
+
+      console.log(data);
+      console.log('id',id);
+      this.CollectionService.addDbtAmount({'id':id, 'clamount':data.clamount})
+      .subscribe(data => {
+        console.log('data', data);
+      });
+      this.amountaddForm.reset();
+      this.amountModal.hide();
+      this.getCollectionsData();
+    }
   }
 
 }

@@ -15,12 +15,16 @@ export class CollectorComponent {
     timeout: 5000
   });
 
+  /* fields:any =[
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+
+  ]; */
   fields:any =[
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''}
 
   ];
   public showSpinnner =true;
@@ -67,7 +71,8 @@ export class CollectorComponent {
       (response : any[]) => {
         this.showChildSpinnner = false;
         console.log(response);
-        if(response.length == 5){
+          this.fields = response;
+        /* if(response.length == 5){
           this.fields = response;
         }else{
           this.fields = [
@@ -78,7 +83,7 @@ export class CollectorComponent {
             {start_percentage:'',end_percentage:'',comission:''},
         
           ];
-        }
+        } */
        
       }, // success path
       error => this.error = error // error path

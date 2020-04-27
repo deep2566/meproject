@@ -1,0 +1,68 @@
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="animated fadeIn" >
+    <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Level 1 Actions Listing
+          <div class="card-header-actions">
+            <button class="btn btn-primary btn-sm active" >
+                Add
+              </button>
+            
+          </div>
+        </div>   
+        <div class="card-body">
+            <!-- <div class="row mb-3" *ngIf="!showSpinnner">
+                <div class="col-md-4 offset-md-8">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Collector Name"/>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="sk-wave" *ngIf="showSpinnner" >
+                <div class="sk-rect sk-rect1"></div>
+                <div class="sk-rect sk-rect2"></div>
+                <div class="sk-rect sk-rect3"></div>
+                <div class="sk-rect sk-rect4"></div>
+                <div class="sk-rect sk-rect5"></div>
+              </div>
+
+              <table *ngIf="!showSpinnner" class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+                <thead>
+                  <tr>
+                    
+                    <th>
+                        <mfDefaultSorter>Name</mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter>Action</mfDefaultSorter>
+                        
+                    </th>
+        
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data" >
+                    <td>{{ item.name }}</td>
+                    <td>
+                      <div class="btn-group" dropdown [autoClose]="true">
+                        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                          Action<span class="caret"></span>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                          <!-- <li role="menuitem"><a class="dropdown-item" [routerLink]="['edit', item.id]">Edit</a></li> -->
+                          <li role="menuitem"><a  class="dropdown-item" (click)="delete(item.id, 'level1')">Delete</a></li>
+                          
+                        </ul>
+                      </div>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+        
+              </table>
+        </div> 
+</div>

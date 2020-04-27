@@ -60,8 +60,11 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                    if(data.code==200){
-                     console.log('login seuccess')
+                     console.log('login seuccess', data);
                     //  localStorage.setItem('currentUser', JSON.stringify(data.userDetails));
+					if(data.userDetails.role == 3){
+						this.returnUrl = "collections";
+					}
                      this.router.navigate([this.returnUrl]);
                    }else{
                     this.alertService.error('Please enter correct username and password');

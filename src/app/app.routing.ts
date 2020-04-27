@@ -159,6 +159,11 @@ export const routes: Routes = [
         path: 'invoice-generate',
         loadChildren: () => import('./invoice/invoice.module').then(m => m.InvoiceModule)
       },
+	   {
+        path: 'action-type',
+        loadChildren: () => import('./views/action-type/action-type.module').then(m => m.ActionTypeModule)
+        // component: ActionTypeComponent
+      }
     ]
   },
   { path: '**', component: P404Component }

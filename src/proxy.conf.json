@@ -1,0 +1,6 @@
+{
+    "/api": {
+      "target": "http//:sfsfsdf",
+      "secure": false
+    }
+}

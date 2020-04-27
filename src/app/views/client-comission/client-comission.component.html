@@ -64,7 +64,7 @@
             <td>{{item.debtor_name}}</td>
 
             <td>{{item.paid_amount}}</td>
-            <td>{{item.fee_collect}}</td>
+            <td>{{item.fee}}</td>
             <td>{{item.created}}</td>
             <td>
               <div class="btn-group" dropdown [autoClose]="true">
@@ -78,7 +78,13 @@
             </td>
           </tr>
         </tbody>
-
+		<tfoot>
+          <tr>
+            <td colspan="7">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

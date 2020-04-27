@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoiceComponent } from './invoice.component';
+import { ActionTypeComponent } from './action-type.component';
 
-describe('InvoiceComponent', () => {
-  let component: InvoiceComponent;
-  let fixture: ComponentFixture<InvoiceComponent>;
+describe('ActionTypeComponent', () => {
+  let component: ActionTypeComponent;
+  let fixture: ComponentFixture<ActionTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoiceComponent ]
+      declarations: [ ActionTypeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InvoiceComponent);
+    fixture = TestBed.createComponent(ActionTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
