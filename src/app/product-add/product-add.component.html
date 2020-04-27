@@ -1,0 +1,102 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-note"></i> User Add
+          <div class="card-header-actions">
+             <button (click)="back()" class="btn  btn-info">
+               <i class="cui-arrow-left icons"></i> Back</button>
+          </div>
+        </div>
+          <div class="card-body row">
+            
+            <div class="col-md-8">
+              <form [formGroup]="angForm" novalidate>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Name</label>
+                  <input type="text" class="form-control" 
+                    formControlName="name" 
+                    #name />
+                </div>
+                <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+                  <div *ngIf="angForm.controls['name'].errors.required">
+                    Name field is required.
+                  </div>
+                  <div *ngIf="angForm.controls['name'].errors.minLength">
+                   dsfsdfsdfsd
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-form-label">Username</label>
+                  <input type="text" class="form-control" 
+                    formControlName="username" 
+                    #username />
+                </div>
+                <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
+                  <div *ngIf="angForm.controls['username'].errors.required">
+                    Username field is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-form-label">Email</label>
+                  <input type="text" class="form-control" 
+                    formControlName="email" 
+                    #email />
+                </div>
+                <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+                  <div *ngIf="angForm.controls['email'].errors.required">
+                    Email field is required.
+                  </div>
+                  <div *ngIf="angForm.controls['email'].errors.email">
+                    Please enter valid email address.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-form-label">Role</label>
+                  <select  class="form-control" 
+                    formControlName="role" 
+                    #role >
+                    <option value="{{item.id}}" *ngFor="let item of roles">{{ item.role_name}}</option>
+                  </select>
+                </div>
+                <div *ngIf="angForm.controls['role'].invalid && (angForm.controls['role'].dirty || angForm.controls['role'].touched)" class="alert alert-danger">
+                  <div *ngIf="angForm.controls['role'].errors.required">
+                    Role field is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-form-label">Password</label>
+                  <input type="password" class="form-control" 
+                    formControlName="password" 
+                    #password />
+                </div>
+
+                <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="alert alert-danger">
+                  <div *ngIf="angForm.controls['password'].errors.required">
+                    Password field is required.
+                  </div>
+                  <div *ngIf="angForm.controls['password'].errors.minLength">
+                   Please enter minimum 6 characters.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <button [ladda]='loading' (click) = "add(name.value,username.value,email.value,password.value,role.value)" type="submit" class="btn btn-primary"
+                    [disabled]="angForm.pristine || angForm.invalid" >
+                    Submit
+                    </button>
+                    <button class="btn btn-danger" type="reset" >Reset</button>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

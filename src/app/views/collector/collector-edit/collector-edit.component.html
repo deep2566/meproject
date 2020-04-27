@@ -1,0 +1,110 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-note"></i> Collector Edit
+          <div class="card-header-actions">
+             <button (click)="back()" class="btn btn-block btn-info btn-sm">Back</button>
+          </div>
+        </div>
+          <div class="card-body">
+            <form [formGroup]="angForm" novalidate>
+              <div class="form-group">
+                <label for="name" class="col-form-label">Name</label>
+                <input type="text" class="form-control" 
+                  formControlName="name" 
+                  [(ngModel)] = "collector.name"
+                  #name />
+              </div>
+              <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['name'].errors.required">
+                  Name field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Email</label>
+                <input type="text" class="form-control" 
+                  formControlName="email" 
+                  [(ngModel)] = "collector.email"
+                  #email />
+              </div>
+              <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['email'].errors.required">
+                  Email field is required.
+                </div>
+                <div *ngIf="angForm.controls['email'].errors.email">
+                  Please enter valid email address.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">ID Number</label>
+                <input type="text" class="form-control" 
+                  formControlName="id_number" 
+                  [(ngModel)] = "collector.id_number"
+                  #id_number />
+              </div>
+              <div *ngIf="angForm.controls['id_number'].invalid && (angForm.controls['id_number'].dirty || angForm.controls['id_number'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['id_number'].errors.required">
+                  Id Number field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Start Date</label>
+                <input 
+                #dp="bsDatepicker"
+                 value="{{ collector.start_date | date:'yyyy-MM-dd' }}"
+                bsDatepicker  type="text" class="form-control" 
+                  formControlName="start_date" 
+                  [(ngModel)] = "collector.start_date"
+                  #start_date />
+              </div>
+              <div *ngIf="angForm.controls['start_date'].invalid && (angForm.controls['start_date'].dirty || angForm.controls['start_date'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['start_date'].errors.required">
+                  Start Date field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Date of Birth</label>
+                <input 
+                #dp="bsDatepicker"
+                value="{{ collector.dob | date:'yyyy-MM-dd' }}"
+                bsDatepicker  type="text" class="form-control" 
+                  formControlName="dob" 
+                  [(ngModel)] = "collector.dob"
+                  #dob />
+              </div>
+              <div *ngIf="angForm.controls['dob'].invalid && (angForm.controls['dob'].dirty || angForm.controls['dob'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['dob'].errors.required">
+                  Date of Birth field is required.
+                </div>
+              </div>
+
+              <!-- <div class="row">
+                <div class="col-xs-12 col-12 col-md-6 form-group">
+                  <input type="text"
+                  class="form-control"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  #dp="bsDatepicker"
+                  bsDatepicker [(bsValue)]="bsValue">
+                </div>
+              </div> -->
+
+              <div class="form-group">
+                  <button [ladda]='loading' (click) = "update(name.value,email.value,id_number.value,start_date.value,dob.value)" type="submit" class="btn btn-primary"
+                  [disabled]="angForm.pristine || angForm.invalid" >
+                  Submit
+                  </button>
+                  <button class="btn btn-danger" type="reset" >Reset</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

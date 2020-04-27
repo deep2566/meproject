@@ -1,0 +1,135 @@
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container> 
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Clients
+      <div class="card-header-actions">
+        <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
+          Add
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3" *ngIf="!showSpinnner">
+        <div class="col-md-4 offset-md-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="sk-wave" *ngIf="showSpinnner" >
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>
+
+      <table *ngIf="!showSpinnner" class="table table-bordered table-striped table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th style="width: 20%">
+              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="phone">Phone</mfDefaultSorter>
+            </th>
+            <th style="width: 40%">
+              <mfDefaultSorter by="address">Address</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="id_no">Action</mfDefaultSorter>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data" (click)="enableField(item.id)">
+            <td>{{item.name}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{ item.address}}</td>
+            <td><a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">Edit</a></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <form (ngSubmit)="onSubmit()" ngNativeValidate>
+        <div class="card">
+          <div class="card-header">
+            Client Fee: 
+            <div class="card-header-actions">
+              <button [disabled]="isDisable" [ladda]='feeSaveloader' type="submit" class="btn btn-pill btn-block btn-primary active">
+                Save
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered"  *ngIf="!showChildSpinnner">
+              <thead>
+                <tr>
+                  <th>Start Amount</th>
+                  <th>End Amount</th>
+                  <th>Percentage(Without Legal:With Doc)</th>
+                  <th>Percentage(Without Legal:Without Doc)</th>
+                  <th>Percentage(With Legal:With Doc)</th>
+                  <th>Percentage(With Legal:Without Doc)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of fields; let index = index" >
+                  <td>
+                    <input [disabled]="isDisable" required type="number" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="fields[index].start_amount" class="form-control"/></td>
+                  <td>
+                    <input [disabled]="isDisable" required type="number"
+                     [ngModelOptions]="{standalone: true}" [(ngModel)]="fields[index].end_amount" class="form-control"/>
+                    </td>
+                  <td>
+                    <input [disabled]="isDisable" required type="number"
+                     [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_doc_without_legal" class="form-control"/>
+                  </td>
+                  <td>
+                    <input [disabled]="isDisable" required type="number"
+                     [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_without_doc_without_legal" class="form-control"/>
+                  </td>
+                  <td>
+                    <input [disabled]="isDisable" required type="number"
+                     [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_with_doc" class="form-control"/>
+                  </td>
+                  <td>
+                    <input [disabled]="isDisable" required type="number"
+                     [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_without_doc" class="form-control"/>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <div class="sk-wave" *ngIf="showChildSpinnner" >
+              <div class="sk-rect sk-rect1"></div>
+              <div class="sk-rect sk-rect2"></div>
+              <div class="sk-rect sk-rect3"></div>
+              <div class="sk-rect sk-rect4"></div>
+              <div class="sk-rect sk-rect5"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>

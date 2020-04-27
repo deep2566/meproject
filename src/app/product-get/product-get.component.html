@@ -1,0 +1,98 @@
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<!-- <button class="btn btn-success mr-1 mb-1" (click)="showSuccess()">Try Success</button> -->
+<div class="animated fadeIn">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Users
+        <div class="card-header-actions">
+          <button class="btn btn-primary btn-sm active" [routerLink]="['/user/create']">
+            Add
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3" *ngIf="!showSpinnner" >
+          <div class="col-md-4 offset-md-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="sk-wave" *ngIf="showSpinnner" >
+          <div class="sk-rect sk-rect1"></div>
+          <div class="sk-rect sk-rect2"></div>
+          <div class="sk-rect sk-rect3"></div>
+          <div class="sk-rect sk-rect4"></div>
+          <div class="sk-rect sk-rect5"></div>
+        </div>
+
+        <table *ngIf="!showSpinnner" class="table table-striped table-hover table-responsive-lg table-bordered" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th>
+                <mfDefaultSorter by="name">Name</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="username">Username</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="email">Role</mfDefaultSorter>
+              </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data">
+              <td>{{item.name}}</td>
+              <td>{{item.username}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.role.role_name}}</td>
+            <td>
+              <button (click)="dangerModal.show(); setCurrentId(item.id,item)" class="btn btn-danger btn-sm mr-1" data-toggle="modal" type="button">
+                Delete
+              </button>
+                <a [routerLink]="['/edit', item.id]" class="btn btn-sm btn-primary active">Edit</a>
+            </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-danger" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete User</h4>
+          <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this User ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">No</button>
+          <button (click) = "deleteProduct(currentId)" type="button" class="btn btn-danger btn-ladda" [ladda]='isLoadingDelete'>Yes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  

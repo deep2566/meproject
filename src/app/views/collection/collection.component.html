@@ -1,0 +1,365 @@
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="animated fadeIn" >
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Collections
+      <div class="card-header-actions">
+      
+        <button (click)="downloadCollection()" class="btn btn-primary btn-sm active">
+          <i  class="cui-cloud-download icons"></i> Download
+        </button>
+        <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
+          Add
+        </button>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <div class="row mb-3" *ngIf="!showSpinnner">
+        <div class="col-md-4 offset-md-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Collector Name"/>
+          </div>
+        </div>
+      </div>
+      <div class="sk-wave" *ngIf="showSpinnner" >
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>
+      <table *ngIf="!showSpinnner" class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th style="width: 10%">
+              <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="collector_name">Collector Name</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="debtor_name">Debtor Name</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter by="amount">Amount</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="remaining_amount">Remaining Amount</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="collected_amount">Collected Amount</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="description">Description</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter>Action</mfDefaultSorter>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data" (click)="setCurrentItem(item)">
+            <td>{{item.client_detail.name}}</td>
+            <td>{{item.collector_detail.name}}</td>
+            <td>{{item.debtor_name}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.amount - item.collected_amount }}</td>
+            <td>{{item.collected_amount}}</td>
+            <td>{{item.description}}</td>
+            <td>
+              <div class="btn-group" dropdown [autoClose]="true">
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                  Action<span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['edit', item.id]">Edit</a></li>
+                  <li role="menuitem"><a  class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
+                  <!-- <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="amountModal.show()">Add Payment</a></li> -->
+                </ul>
+              </div>
+            </td>
+            
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="animated fadeIn" >
+  <div class="card">
+    <div class="card-header">
+      Collection Detail
+    </div>
+    <div class="card-body"> 
+      <div *ngIf="(currentItem | json) != ({} | json)">
+
+        <tabset>
+          <tab heading="Debtor Information">
+            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
+              Add Phone
+            </button>
+           
+            <table class="table table-bordered">
+
+              <tbody>
+                <tr>
+                  <th>Debtor Name : </th>
+                  <td>{{ currentItem.debtor_name}}</td>
+                </tr>
+                <tr>
+                  <th>Debtor Email : </th>
+                  <td>{{ currentItem.debtor_email}}</td>
+                </tr>
+                <tr>
+                  <th>Debtor Phone:</th>
+                  <td>
+                    {{ currentItem.debtor_phone}}
+                    <i *ngFor="let item of currentItem.debt_phone">
+                        , {{ item.phone}}
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Amount Collect From Debtor:</th>
+                  <td>{{ currentItem.amount}}</td>
+                </tr>
+                <tr>
+                  <th>Supporting Documents:</th>
+                  <td>{{currentItem.is_provide_documents === 1 ? 'Yes' : 'No'}} </td>
+                </tr>
+                <tr>
+                  <th>Supporting Legal Procedure:</th>
+                  <td>{{ currentItem.is_legal_procedure === 1 ? 'Yes' : 'No'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+          <tab heading="Client Information">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th width="30%">Client Name : </th>
+                  <td>{{ currentItem.client_detail.name}}</td>
+                </tr>
+                <tr>
+                  <th>Client Email : </th>
+                  <td>{{ currentItem.client_detail.email}}</td>
+                </tr>
+                <tr>
+                  <th>Client Phone:</th>
+                  <td>{{ currentItem.client_detail.phone}}</td>
+                </tr>
+                <tr>
+                  <th>Client Address:</th>
+                  <td>{{ currentItem.client_detail.address}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+          <tab heading="Actions">
+            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="actionModal.show()">
+              Add Action
+            </button>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Level 1</th>
+                  <th>Level 2</th>
+                  <th>Level 3</th>
+                  <th>Notes</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of currentItem.action_response">
+                  <td>{{ item.level_one_detail.name}}</td>
+                  <td>{{ item.level_two_detail.name}}	</td>
+                  <td>{{ item.level_three_detail.name}}</td>
+                  <td>{{ item.notes}}</td>
+                  <td>{{ item.created | date: 'MMM dd yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+          <tab heading="Attachements">
+            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
+              Add Attachment
+            </button>
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let item of currentItem.attachment; let i = index">
+                    <th>Attachment {{i+1}}:</th>
+                    <td><i (click)="download(item.id)" class="cui-cloud-download icons font-2xl d-block mt-4"></i>{{ item.file}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </tab>
+        </tabset> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="phoneaddForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Phone No</h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="name" class="col-form-label">Phone Number</label>
+              <input  formControlName="phone"  type="number" class="form-control"  
+                #phone />
+            </div>
+            <div *ngIf="phoneaddForm.controls['phone'].invalid && (phoneaddForm.controls['phone'].dirty || phoneaddForm.controls['phone'].touched)" class="alert alert-danger">
+              <div *ngIf="phoneaddForm.controls['phone'].errors.required">
+                Please enter Phone number.
+              </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide();">Close</button>
+          <button [disabled]="phoneaddForm.pristine || phoneaddForm.invalid" (click) = "addPhone(phone.value,currentItem.id)" type="submit" [ladda]='savebuttonLoader' class="btn btn-primary">Save</button>
+        </div>
+
+      </div>
+   </form>
+    
+   
+  </div>
+</div>
+
+<div bsModal #actionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form #actionaddForm="ngForm" ngNativeValidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add action </h4>
+          <button type="button" class="close" (click)="actionModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="name" class="col-form-label">Level 1</label>
+              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionOne($event.target.value)" [(ngModel)]="level_one" #level1> 
+                <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Level 2</label>
+              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionTwo($event.target.value)" [(ngModel)]="level_two" #level2>
+                <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Level 3</label>
+              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionThree($event.target.value)" [(ngModel)]="level_three" #level3>
+                <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Description</label>
+              <textarea required rows="5" class="form-control" #description></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click(click)="actionModal.hide()">Close</button>
+          <button [disabled]="false" type="submit" [ladda]='savebuttonLoader' (click) = "addAction(level_one,level_two,level_three,description.value,currentItem.id)" class="btn btn-primary">Save changes</button>
+        </div>
+
+      </div>
+   </form>
+    
+   
+  </div>
+</div>
+
+
+<div bsModal #attachModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="form" (ngSubmit)="submitAttachment(currentItem.id)" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Attach File</h4>
+          <button type="button" class="close" (click)="attachModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="name" class="col-form-label">File</label>
+              <input  type="file" class="form-control" (change)="uploadFile($event)" />
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="attachModal.hide()">Close</button>
+          <button [disabled]="false" type="submit"  class="btn btn-primary">Save changes</button>
+        </div>
+
+      </div>
+    </form>
+    
+   
+  </div>
+</div>
+
+<div bsModal #amountModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="amountaddForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Amount</h4>
+          <button type="button" class="close" (click)="amountModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label">Amount</label>
+            <input type="text" class="form-control" 
+              formControlName="clamount" 
+              #clamount />
+          </div>
+          <div *ngIf="amountaddForm.controls['clamount'].invalid && (amountaddForm.controls['clamount'].dirty || amountaddForm.controls['clamount'].touched)" class="alert alert-danger">
+            <div *ngIf="amountaddForm.controls['clamount'].errors.required">
+              Please enter Collected Amout
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="amountModal.hide()">Close</button>
+          <button [disabled]="amountaddForm.pristine || amountaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addAmount(amountaddForm.value,currentItem.id)" class="btn btn-primary">Add</button>
+        </div>
+
+      </div>
+   </form>
+    
+   
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,87 @@
+
+<div class="animated fadeIn" >
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Client Comission
+      <div class="card-header-actions">
+        <button (click)="downloadCollection()" class="btn btn-primary btn-sm active">
+          <i  class="cui-cloud-download icons"></i> Download
+        </button>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <div class="row mb-3" *ngIf="!showSpinnner">
+        <div class="col-md-4 offset-md-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Collector Name"/>
+          </div>
+        </div>
+      </div>
+      <div class="sk-wave" *ngIf="showSpinnner" >
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>
+      <table *ngIf="!showSpinnner" class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th >
+              <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="collector_name">Collector Name</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="debtor_name">Debtor Name</mfDefaultSorter>
+            </th>
+
+
+            <th >
+              <mfDefaultSorter by="paid_amount">Collected Amount</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="fee_collect">Collection Fee</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="fee_collect">Created</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter>Action</mfDefaultSorter>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data">
+            <td>{{item.client_name}}</td>
+            <td>{{item.collector_name}}</td>
+            <td>{{item.debtor_name}}</td>
+
+            <td>{{item.paid_amount}}</td>
+            <td>{{item.fee_collect}}</td>
+            <td>{{item.created}}</td>
+            <td>
+              <div class="btn-group" dropdown [autoClose]="true">
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                  Action<span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">Make Invoice</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+

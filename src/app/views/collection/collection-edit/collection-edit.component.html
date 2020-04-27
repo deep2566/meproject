@@ -1,0 +1,160 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-note"></i> Edit Collection
+
+          <div class="card-header-actions">
+             <button (click)="back()" class="btn btn-block btn-info btn-sm">Back</button>
+          </div>
+        </div>
+          <div class="card-body col-md-8">
+            <form [formGroup]="angForm" novalidate>
+              <div class="form-group">
+                <label class="col-form-label">Client Name</label>
+                <select type="text" class="form-control" 
+                  [(ngModel)] = "collection.client_id" 
+                  formControlName="client_id" 
+                  #client_id >
+                  <option value="{{item.id}}" *ngFor="let item of clients">{{ item.name}}</option>
+                </select>
+              </div>
+              <div *ngIf="angForm.controls['client_id'].invalid && (angForm.controls['client_id'].dirty || angForm.controls['client_id'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['client_id'].errors.required">
+                  Client Name field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Collector Name</label>
+                <select type="text" class="form-control" 
+                  formControlName="collector_id"
+                  [(ngModel)] = "collection.collector_id" 
+                  #collector_id >
+                  <option value="{{item.id}}" *ngFor="let item of collectors">{{item.name}}</option>
+                </select>
+              </div>
+              <div *ngIf="angForm.controls['collector_id'].invalid && (angForm.controls['collector_id'].dirty || angForm.controls['collector_id'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['collector_id'].errors.required">
+                  Collector Name field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="debtor_name" class="col-form-label">Debtor Name</label>
+                <input type="text" class="form-control" 
+                  formControlName="debtor_name"
+                  [(ngModel)] = "collection.debtor_name"  
+                  #debtor_name />
+              </div>
+              <div *ngIf="angForm.controls['debtor_name'].invalid && (angForm.controls['debtor_name'].dirty || angForm.controls['debtor_name'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['debtor_name'].errors.required">
+                  Debtor Name field is required.
+                </div>
+              </div>
+
+              
+
+              <div class="form-group">
+                <label class="col-form-label"> Debtor Email</label>
+                <input type="text" class="form-control" 
+                  formControlName="debtor_email"
+                  [(ngModel)] = "collection.debtor_email" 
+                  #debtor_email />
+              </div>
+              <div *ngIf="angForm.controls['debtor_email'].invalid && (angForm.controls['debtor_email'].dirty || angForm.controls['debtor_email'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['debtor_email'].errors.required">
+                  Debtor Email field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Debtor Phone</label>
+                <input type="text" class="form-control" 
+                  formControlName="debtor_phone"
+                  [(ngModel)] = "collection.debtor_phone" 
+                  #debtor_phone />
+              </div>
+              <div *ngIf="angForm.controls['debtor_phone'].invalid && (angForm.controls['debtor_phone'].dirty || angForm.controls['debtor_phone'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['debtor_phone'].errors.required">
+                  Debtor Phone field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Supporting Documents:</label>
+                <select type="text" class="form-control" 
+                  formControlName="is_provide_documents"
+                  [(ngModel)] = "collection.is_provide_documents" 
+                  #is_provide_documents >
+                  <option value=""></option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <div *ngIf="angForm.controls['is_provide_documents'].invalid && (angForm.controls['is_provide_documents'].dirty || angForm.controls['is_provide_documents'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['is_provide_documents'].errors.required">
+                  Supporting Document field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Supporting Legal Procedure</label>
+                <select type="text" class="form-control" 
+                  formControlName="is_legal_procedure" 
+                  [(ngModel)] = "collection.is_legal_procedure"
+                  #is_legal_procedure >
+                  <option value=""></option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <div *ngIf="angForm.controls['is_legal_procedure'].invalid && (angForm.controls['is_legal_procedure'].dirty || angForm.controls['is_legal_procedure'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['is_legal_procedure'].errors.required">
+                  Supporting Document field is required.
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="amount" class="col-form-label">Amount</label>
+                <input type="text" class="form-control" 
+                  formControlName="amount" 
+                  [(ngModel)] = "collection.amount"
+                  #amount />
+              </div>
+              <div *ngIf="angForm.controls['amount'].invalid && (angForm.controls['amount'].dirty || angForm.controls['amount'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['amount'].errors.required">
+                  Amount field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Description</label>
+                <textarea rows="5" class="form-control" 
+                  formControlName="description" 
+                  [(ngModel)] = "collection.description"
+                  #description ></textarea>
+              </div>
+              <div *ngIf="angForm.controls['description'].invalid && (angForm.controls['description'].dirty || angForm.controls['description'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['description'].errors.required">
+                  Description field is required.
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                  <button [ladda]='loading' (click) = "update(angForm.value,collection.id)" type="submit" class="btn btn-primary"
+                  [disabled]="angForm.pristine || angForm.invalid" >
+                  Submit
+                  </button>
+                  <button class="btn btn-danger" type="reset" >Reset</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
