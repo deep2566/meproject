@@ -38,10 +38,11 @@ export class ClientService {
     return this.http.get(`${this.clientFeeUrl}/${id}`);
   }
 
-  add(name,email,phone,address) {
+  add(name,email,phone,address,username,password) {
     const obj = {
-      name,email,phone,address
+      name,email,phone,address,username,password
     };
+    console.log(obj);
     return this.http.post(`${this.uri}/add`, obj);
   }
 

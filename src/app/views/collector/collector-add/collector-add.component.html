@@ -39,6 +39,18 @@
               </div>
 
               <div class="form-group">
+                <label class="col-form-label">Username</label>
+                <input type="text" class="form-control" 
+                  formControlName="username" 
+                  #username />
+              </div>
+              <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['username'].errors.required">
+                  Username field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
                 <label class="col-form-label">Password</label>
                 <input type="password" class="form-control" 
                   formControlName="password" 
@@ -104,7 +116,7 @@
               </div> -->
 
               <div class="form-group">
-                  <button [ladda]='loading' (click) = "add(name.value,email.value,password.value,id_number.value,start_date.value,dob.value)" type="submit" class="btn btn-primary"
+                  <button [ladda]='loading' (click) = "add(name.value,email.value,password.value,id_number.value,start_date.value,dob.value,username.value)" type="submit" class="btn btn-primary"
                   [disabled]="angForm.pristine || angForm.invalid" >
                   Submit
                   </button>

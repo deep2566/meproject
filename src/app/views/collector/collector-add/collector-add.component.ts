@@ -47,6 +47,7 @@ export class CollectorAddComponent implements OnInit {
     this.angForm = this.fb.group({
       name: ['', Validators.required ],
       email: ['', [Validators.required,Validators.email] ],
+      username: ['', Validators.required ],
       password: ['', Validators.required ],
       id_number: ['', Validators.required ],
       start_date:['',Validators.required],
@@ -55,10 +56,10 @@ export class CollectorAddComponent implements OnInit {
     });
   }
 
-  add(name,email,password,id_number,start_date,dob) {
+  add(name,email,password,id_number,start_date,dob,username) {
     console.log('sdfsdfsdfdsfsd');
     this.loading =true;
-    this.ps.add(name,email,password,id_number,start_date,dob)
+    this.ps.add(name,email,password,id_number,start_date,dob,username)
     .subscribe(data => {
       this.loading = false;
       this.alertService.success('Collector has been added successfully.', true)

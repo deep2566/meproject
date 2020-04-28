@@ -23,9 +23,11 @@ export class ClientComissionComponent {
   public filterQuery = '';
   public item:any;
   public showSpinnner = true;
-
+  public currentUser:any;
 
   constructor(private ClientComissionService: ClientComissionService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
       this.ClientComissionService.getData()
       .subscribe(
         (data) => {
@@ -54,7 +56,5 @@ export class ClientComissionComponent {
   downloadCollection(){
     window.location.href = environment.apiUrl+'download-client-comission';
   }
-
-
 
 }

@@ -38,9 +38,9 @@ export class CollectorService {
     return this.http.get(`${this.collectorFeeUrl}/${id}`);
   }
 
-  add(name,email,password,id_number,start_date,dob) {
+  add(name,email,password,id_number,start_date,dob,username) {
     const obj = {
-      name,email,password,id_number,start_date,dob
+      name,email,password,id_number,start_date,dob,username
     };
     return this.http.post(`${this.uri}/add`, obj);
   }

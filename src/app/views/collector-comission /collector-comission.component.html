@@ -4,7 +4,7 @@
     <div class="card-header">
       <i class="fa fa-align-justify"></i> Collector Comission
       <div class="card-header-actions">
-        <button (click)="downloadCollection()" class="btn btn-primary btn-sm active">
+        <button *ngIf="currentUser.role==1" (click)="downloadCollection()" class="btn btn-primary btn-sm active">
           <i  class="cui-cloud-download icons"></i> Download
         </button>
       </div>

@@ -49,15 +49,17 @@ export class ClientAddComponent implements OnInit {
     this.angForm = this.fb.group({
       name: ['', Validators.required ],
       email: ['', [Validators.required,Validators.email] ],
+      username: ['', Validators.required ],
+      password: ['', Validators.required ],
       phone: ['', Validators.required ],
       address: ['', Validators.required ]
     });
   }
 
-  add(name,email,phone,address) {
+  add(name,email,phone,address,username,password) {
     console.log('add call in component');
     this.loading =true;
-    this.ps.add(name,email,phone,address)
+    this.ps.add(name,email,phone,address,username,password)
     .subscribe(data => {
       this.loading = false;
       this.alertService.success('Client has been added successfully.', true)

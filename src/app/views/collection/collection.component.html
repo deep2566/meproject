@@ -5,10 +5,10 @@
       <i class="fa fa-align-justify"></i> Collections
       <div class="card-header-actions">
       
-        <button (click)="downloadCollection()" class="btn btn-primary btn-sm active">
+        <button *ngIf="currentUser.role==1"  (click)="downloadCollection()" class="btn btn-primary btn-sm active">
           <i  class="cui-cloud-download icons"></i> Download
         </button>
-        <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
+        <button *ngIf="currentUser.role==1" class="btn btn-primary btn-sm active" [routerLink]="['create']">
           Add
         </button>
       </div>
@@ -56,7 +56,7 @@
             <th style="width: 10%">
               <mfDefaultSorter by="description">Description</mfDefaultSorter>
             </th>
-            <th style="width: 20%">
+            <th style="width: 20%" *ngIf="currentUser.role==1">
               <mfDefaultSorter>Action</mfDefaultSorter>
             </th>
 
@@ -71,7 +71,7 @@
             <td>{{item.amount - item.collected_amount }}</td>
             <td>{{item.collected_amount}}</td>
             <td>{{item.description}}</td>
-            <td>
+            <td *ngIf="currentUser.role==1">
               <div class="btn-group" dropdown [autoClose]="true">
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
                   Action<span class="caret"></span>
@@ -103,7 +103,7 @@
 
         <tabset>
           <tab heading="Debtor Information">
-            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
+            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
               Add Phone
             </button>
            
@@ -165,7 +165,7 @@
             </table>
           </tab>
           <tab heading="Actions">
-            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="actionModal.show()">
+            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="actionModal.show()">
               Add Action
             </button>
             <table class="table">
@@ -190,7 +190,7 @@
             </table>
           </tab>
           <tab heading="Attachements">
-            <button type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
+            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
               Add Attachment
             </button>
               <table class="table">

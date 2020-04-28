@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 import { collectorNavItems } from '../../_collectorNav';
 import { AuthenticationService } from '../../_services/authentication.service';
+import { clientNavItems} from '../../_clientNav';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,10 @@ export class DefaultLayoutComponent implements OnInit {
 	}
 	if(currentUser.role == 3){
 		this.navItems = collectorNavItems;
+  }
+  
+  if(currentUser.role == 2){
+		this.navItems = clientNavItems;
 	}
 	console.log('login-user', JSON.parse(localStorage.getItem('currentUser')));
   }

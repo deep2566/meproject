@@ -23,9 +23,12 @@ export class CollectorComissionComponent {
   public filterQuery = '';
   public item:any;
   public showSpinnner = true;
+  public currentUser:any; 
 
 
   constructor(private CollectorComissionService: CollectorComissionService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
       this.CollectorComissionService.getData()
       .subscribe(
         (data) => {
