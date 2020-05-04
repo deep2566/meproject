@@ -13,12 +13,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ActionTypeRoutingModule } from './action-type-routing.module';
 import { ActionTypeComponent } from './action-type.component';
 import { ToasterModule } from 'angular2-toaster';
+import { ActionAddComponent } from './action-add/action-add.component';
 
 
 @NgModule({
   declarations: [
     ActionTypeComponent,
-    DataFilterPipe
+    DataFilterPipe,
+    ActionAddComponent
   ],
   imports: [
     CommonModule,

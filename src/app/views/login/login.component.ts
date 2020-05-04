@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
                    if(data.code==200){
                      console.log('login seuccess', data);
                     //  localStorage.setItem('currentUser', JSON.stringify(data.userDetails));
-					if(data.userDetails.role == 3){
+					if(data.userDetails.role == 3 || data.userDetails.role == 2 ){
 						this.returnUrl = "collections";
 					}
                      this.router.navigate([this.returnUrl]);

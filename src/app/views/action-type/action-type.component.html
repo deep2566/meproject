@@ -2,12 +2,11 @@
 <div class="animated fadeIn" >
     <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Level 1 Actions Listing
+          <i class="fa fa-align-justify"></i> Level Actions Listing
           <div class="card-header-actions">
-            <button class="btn btn-primary btn-sm active" >
+              <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
                 Add
               </button>
-            
           </div>
         </div>   
         <div class="card-body">
@@ -38,6 +37,9 @@
                         <mfDefaultSorter>Name</mfDefaultSorter>
                     </th>
                     <th>
+                      <mfDefaultSorter>Type</mfDefaultSorter>
+                  </th>
+                    <th>
                         <mfDefaultSorter>Action</mfDefaultSorter>
                         
                     </th>
@@ -47,6 +49,7 @@
                 <tbody>
                   <tr *ngFor="let item of mf.data" >
                     <td>{{ item.name }}</td>
+                    <td>Level {{ item.level }}</td>
                     <td>
                       <div class="btn-group" dropdown [autoClose]="true">
                         <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -62,6 +65,13 @@
                     
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="8">
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
         
               </table>
         </div> 

@@ -1,0 +1,55 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-note"></i> Add New Action
+
+          <div class="card-header-actions">
+             <button (click)="back()" class="btn btn-block btn-info btn-sm">Back</button>
+          </div>
+        </div>
+          <div class="card-body col-md-8">
+            <form [formGroup]="angForm" novalidate>
+              <div class="form-group">
+                <label for="name" class="col-form-label">Name</label>
+                <input type="text" class="form-control" 
+                  formControlName="name" 
+                  #name />
+              </div>
+              <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['name'].errors.required">
+                  Name field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label">Lavel</label>
+                <select  class="form-control" 
+                formControlName="lavel" 
+                #lavel >
+                  <option value="1">Level 1</option>
+                  <option value="2">Level 2</option>
+                  <option value="3">Level 3</option>
+                </select>
+              </div>
+
+              <div *ngIf="angForm.controls['lavel'].invalid && (angForm.controls['lavel'].dirty || angForm.controls['lavel'].touched)" class="alert alert-danger">
+                <div *ngIf="angForm.controls['lavel'].errors.required">
+                  Lavel field is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <button  (click) = "add(name.value,lavel.value)"  type="submit" class="btn btn-primary"
+                  [disabled]="angForm.pristine || angForm.invalid" >
+                  Submit
+                  </button>
+                  <button class="btn btn-danger" type="reset" >Reset</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

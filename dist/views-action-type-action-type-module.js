@@ -1,5 +1,18 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["views-action-type-action-type-module"],{
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/action-type/action-add/action-add.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/action-type/action-add/action-add.component.html ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"icon-note\"></i> Add New Action\n\n          <div class=\"card-header-actions\">\n             <button (click)=\"back()\" class=\"btn btn-block btn-info btn-sm\">Back</button>\n          </div>\n        </div>\n          <div class=\"card-body col-md-8\">\n            <form [formGroup]=\"angForm\" novalidate>\n              <div class=\"form-group\">\n                <label for=\"name\" class=\"col-form-label\">Name</label>\n                <input type=\"text\" class=\"form-control\" \n                  formControlName=\"name\" \n                  #name />\n              </div>\n              <div *ngIf=\"angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)\" class=\"alert alert-danger\">\n                <div *ngIf=\"angForm.controls['name'].errors.required\">\n                  Name field is required.\n                </div>\n              </div>\n\n              <div class=\"form-group\">\n                <label class=\"col-form-label\">Lavel</label>\n                <select  class=\"form-control\" \n                formControlName=\"lavel\" \n                #lavel >\n                  <option value=\"1\">Level 1</option>\n                  <option value=\"2\">Level 2</option>\n                  <option value=\"3\">Level 3</option>\n                </select>\n              </div>\n\n              <div *ngIf=\"angForm.controls['lavel'].invalid && (angForm.controls['lavel'].dirty || angForm.controls['lavel'].touched)\" class=\"alert alert-danger\">\n                <div *ngIf=\"angForm.controls['lavel'].errors.required\">\n                  Lavel field is required.\n                </div>\n              </div>\n\n              <div class=\"form-group\">\n                  <button  (click) = \"add(name.value,lavel.value)\"  type=\"submit\" class=\"btn btn-primary\"\n                  [disabled]=\"angForm.pristine || angForm.invalid\" >\n                  Submit\n                  </button>\n                  <button class=\"btn btn-danger\" type=\"reset\" >Reset</button>\n              </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/action-type/action-type.component.html":
 /*!****************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/action-type/action-type.component.html ***!
@@ -9,7 +22,87 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<toaster-container [toasterconfig]=\"toasterconfig\"></toaster-container>\n<div class=\"animated fadeIn\" >\n    <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"fa fa-align-justify\"></i> Level 1 Actions Listing\n          <div class=\"card-header-actions\">\n            <button class=\"btn btn-primary btn-sm active\" >\n                Add\n              </button>\n            \n          </div>\n        </div>   \n        <div class=\"card-body\">\n            <!-- <div class=\"row mb-3\" *ngIf=\"!showSpinnner\">\n                <div class=\"col-md-4 offset-md-8\">\n                  <div class=\"input-group\">\n                    <div class=\"input-group-prepend\">\n                      <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n                    </div>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"filterQuery\" placeholder=\"Search by Collector Name\"/>\n                  </div>\n                </div>\n              </div> -->\n\n              <div class=\"sk-wave\" *ngIf=\"showSpinnner\" >\n                <div class=\"sk-rect sk-rect1\"></div>\n                <div class=\"sk-rect sk-rect2\"></div>\n                <div class=\"sk-rect sk-rect3\"></div>\n                <div class=\"sk-rect sk-rect4\"></div>\n                <div class=\"sk-rect sk-rect5\"></div>\n              </div>\n\n              <table *ngIf=\"!showSpinnner\" class=\"table table-bordered table-hover table-responsive-lg\" [mfData]=\"data | dataFilter : filterQuery\" #mf=\"mfDataTable\" [mfRowsOnPage]=\"10\">\n                <thead>\n                  <tr>\n                    \n                    <th>\n                        <mfDefaultSorter>Name</mfDefaultSorter>\n                    </th>\n                    <th>\n                        <mfDefaultSorter>Action</mfDefaultSorter>\n                        \n                    </th>\n        \n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngFor=\"let item of mf.data\" >\n                    <td>{{ item.name }}</td>\n                    <td>\n                      <div class=\"btn-group\" dropdown [autoClose]=\"true\">\n                        <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">\n                          Action<span class=\"caret\"></span>\n                        </button>\n                        <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\n                          <!-- <li role=\"menuitem\"><a class=\"dropdown-item\" [routerLink]=\"['edit', item.id]\">Edit</a></li> -->\n                          <li role=\"menuitem\"><a  class=\"dropdown-item\" (click)=\"delete(item.id, 'level1')\">Delete</a></li>\n                          \n                        </ul>\n                      </div>\n                    </td>\n                    \n                  </tr>\n                </tbody>\n        \n              </table>\n        </div> \n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<toaster-container [toasterconfig]=\"toasterconfig\"></toaster-container>\n<div class=\"animated fadeIn\" >\n    <div class=\"card\">\n        <div class=\"card-header\">\n          <i class=\"fa fa-align-justify\"></i> Level Actions Listing\n          <div class=\"card-header-actions\">\n              <button class=\"btn btn-primary btn-sm active\" [routerLink]=\"['create']\">\n                Add\n              </button>\n          </div>\n        </div>   \n        <div class=\"card-body\">\n            <!-- <div class=\"row mb-3\" *ngIf=\"!showSpinnner\">\n                <div class=\"col-md-4 offset-md-8\">\n                  <div class=\"input-group\">\n                    <div class=\"input-group-prepend\">\n                      <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n                    </div>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"filterQuery\" placeholder=\"Search by Collector Name\"/>\n                  </div>\n                </div>\n              </div> -->\n\n              <div class=\"sk-wave\" *ngIf=\"showSpinnner\" >\n                <div class=\"sk-rect sk-rect1\"></div>\n                <div class=\"sk-rect sk-rect2\"></div>\n                <div class=\"sk-rect sk-rect3\"></div>\n                <div class=\"sk-rect sk-rect4\"></div>\n                <div class=\"sk-rect sk-rect5\"></div>\n              </div>\n\n              <table *ngIf=\"!showSpinnner\" class=\"table table-bordered table-hover table-responsive-lg\" [mfData]=\"data | dataFilter : filterQuery\" #mf=\"mfDataTable\" [mfRowsOnPage]=\"10\">\n                <thead>\n                  <tr>\n                    \n                    <th>\n                        <mfDefaultSorter>Name</mfDefaultSorter>\n                    </th>\n                    <th>\n                      <mfDefaultSorter>Type</mfDefaultSorter>\n                  </th>\n                    <th>\n                        <mfDefaultSorter>Action</mfDefaultSorter>\n                        \n                    </th>\n        \n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngFor=\"let item of mf.data\" >\n                    <td>{{ item.name }}</td>\n                    <td>Level {{ item.level }}</td>\n                    <td>\n                      <div class=\"btn-group\" dropdown [autoClose]=\"true\">\n                        <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">\n                          Action<span class=\"caret\"></span>\n                        </button>\n                        <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\n                          <!-- <li role=\"menuitem\"><a class=\"dropdown-item\" [routerLink]=\"['edit', item.id]\">Edit</a></li> -->\n                          <li role=\"menuitem\"><a  class=\"dropdown-item\" (click)=\"delete(item.id, 'level1')\">Delete</a></li>\n                          \n                        </ul>\n                      </div>\n                    </td>\n                    \n                  </tr>\n                </tbody>\n                <tfoot>\n                  <tr>\n                    <td colspan=\"8\">\n                      <mfBootstrapPaginator [rowsOnPageSet]=\"[5,10,15]\"></mfBootstrapPaginator>\n                    </td>\n                  </tr>\n                </tfoot>\n        \n              </table>\n        </div> \n</div>");
+
+/***/ }),
+
+/***/ "./src/app/views/action-type/action-add/action-add.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/views/action-type/action-add/action-add.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: ActionAddComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionAddComponent", function() { return ActionAddComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _notifications_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../notifications/alert.service */ "./src/app/views/notifications/alert.service.ts");
+/* harmony import */ var _action_type_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../action-type.service */ "./src/app/views/action-type/action-type.service.ts");
+
+
+
+
+
+
+var ActionAddComponent = /** @class */ (function () {
+    function ActionAddComponent(fb, ps, alertService, router) {
+        this.fb = fb;
+        this.ps = ps;
+        this.alertService = alertService;
+        this.router = router;
+        this.loading = false;
+        this.createForm();
+    }
+    ActionAddComponent.prototype.createForm = function () {
+        this.angForm = this.fb.group({
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            lavel: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+        });
+    };
+    ActionAddComponent.prototype.add = function (name, lavel) {
+        var _this = this;
+        console.log('name ' + name);
+        console.log('lavel ' + lavel);
+        this.loading = true;
+        this.ps.add(name, lavel)
+            .subscribe(function (data) {
+            _this.loading = false;
+            _this.alertService.success('Action has been added successfully.', true);
+            _this.router.navigate(['/action-type']);
+        });
+    };
+    ActionAddComponent.prototype.ngOnInit = function () {
+        console.log('asdfsadf');
+    };
+    ActionAddComponent.prototype.back = function () {
+        this.router.navigate(['/action-type']);
+    };
+    ActionAddComponent.ctorParameters = function () { return [
+        { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+        { type: _action_type_service__WEBPACK_IMPORTED_MODULE_5__["ActionTypeService"] },
+        { type: _notifications_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+    ]; };
+    ActionAddComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./action-add.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/views/action-type/action-add/action-add.component.html")).default,
+            providers: [_action_type_service__WEBPACK_IMPORTED_MODULE_5__["ActionTypeService"]],
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
+            styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ../../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss */ "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss")).default, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ../../../../scss/vendors/ng-select/ng-select.scss */ "./src/scss/vendors/ng-select/ng-select.scss")).default]
+        }),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+            _action_type_service__WEBPACK_IMPORTED_MODULE_5__["ActionTypeService"],
+            _notifications_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], ActionAddComponent);
+    return ActionAddComponent;
+}());
+
+
 
 /***/ }),
 
@@ -27,6 +120,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _action_type_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./action-type.component */ "./src/app/views/action-type/action-type.component.ts");
+/* harmony import */ var _action_add_action_add_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./action-add/action-add.component */ "./src/app/views/action-type/action-add/action-add.component.ts");
+
 
 
 
@@ -38,7 +133,14 @@ var routes = [
         data: {
             title: 'Action Type'
         }
-    }
+    },
+    {
+        path: 'create',
+        component: _action_add_action_add_component__WEBPACK_IMPORTED_MODULE_4__["ActionAddComponent"],
+        data: {
+            title: 'Action Add'
+        }
+    },
 ];
 var ActionTypeRoutingModule = /** @class */ (function () {
     function ActionTypeRoutingModule() {
@@ -173,10 +275,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _action_type_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./action-type-routing.module */ "./src/app/views/action-type/action-type-routing.module.ts");
 /* harmony import */ var _action_type_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./action-type.component */ "./src/app/views/action-type/action-type.component.ts");
 /* harmony import */ var angular2_toaster__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! angular2-toaster */ "./node_modules/angular2-toaster/angular2-toaster.js");
+/* harmony import */ var _action_add_action_add_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./action-add/action-add.component */ "./src/app/views/action-type/action-add/action-add.component.ts");
 
 
 
 // Collection
+
 
 
 
@@ -192,7 +296,8 @@ var ActionTypeModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
                 _action_type_component__WEBPACK_IMPORTED_MODULE_9__["ActionTypeComponent"],
-                _datafilterpipe__WEBPACK_IMPORTED_MODULE_5__["DataFilterPipe"]
+                _datafilterpipe__WEBPACK_IMPORTED_MODULE_5__["DataFilterPipe"],
+                _action_add_action_add_component__WEBPACK_IMPORTED_MODULE_11__["ActionAddComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -250,10 +355,17 @@ var ActionTypeService = /** @class */ (function () {
         );
     };
     ActionTypeService.prototype.getAction = function () {
-        return this.http.get(this.actionurl + '/level1')
+        return this.http.get(this.actionurl)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(3), // retry a failed request up to 3 times
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError) // then handle the error
         );
+    };
+    ActionTypeService.prototype.add = function (name, level) {
+        var obj = {
+            name: name, level: level
+        };
+        console.log(obj);
+        return this.http.post(this.uri + "/add", obj);
     };
     ActionTypeService.prototype.addAction = function (level_one, level_two, level_three, notes, collection_id) {
         var obj = {

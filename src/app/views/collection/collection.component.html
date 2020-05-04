@@ -35,28 +35,31 @@
       <table *ngIf="!showSpinnner" class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>
           <tr>
-            <th style="width: 10%">
+            <th>
+              <mfDefaultSorter by="name">Collection Id</mfDefaultSorter>
+            </th>
+            <th>
               <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th>
               <mfDefaultSorter by="collector_name">Collector Name</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th>
               <mfDefaultSorter by="debtor_name">Debtor Name</mfDefaultSorter>
             </th>
-            <th style="width: 20%">
+            <th>
               <mfDefaultSorter by="amount">Amount</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
-              <mfDefaultSorter by="remaining_amount">Remaining Amount</mfDefaultSorter>
+            <th>
+              <mfDefaultSorter by="remaining_amount">R. Amount</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="collected_amount">Collected Amount</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th>
               <mfDefaultSorter by="description">Description</mfDefaultSorter>
             </th>
-            <th style="width: 20%" *ngIf="currentUser.role==1">
+            <th *ngIf="currentUser.role==1">
               <mfDefaultSorter>Action</mfDefaultSorter>
             </th>
 
@@ -64,6 +67,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of mf.data" (click)="setCurrentItem(item)">
+            <td>#{{item.id}}</td>
             <td>{{item.client_detail.name}}</td>
             <td>{{item.collector_detail.name}}</td>
             <td>{{item.debtor_name}}</td>

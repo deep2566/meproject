@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ActionTypeComponent } from './action-type.component';
+import { ActionAddComponent } from './action-add/action-add.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,14 @@ const routes: Routes = [
     data: {
       title: 'Action Type'
     }
-  }
+  },
+  {
+    path: 'create',
+    component: ActionAddComponent,
+    data: {
+      title: 'Action Add'
+    }
+  },
 ];
 
 @NgModule({

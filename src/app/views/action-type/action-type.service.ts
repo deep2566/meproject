@@ -38,11 +38,20 @@ export class ActionTypeService {
   }
 
   getAction() {
-    return this.http.get(this.actionurl+'/level1')
+    return this.http.get(this.actionurl)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
+  }
+
+
+  add(name,level) {
+    const obj = {
+      name,level
+    };
+    console.log(obj);
+    return this.http.post(`${this.uri}/add`, obj);
   }
 
 

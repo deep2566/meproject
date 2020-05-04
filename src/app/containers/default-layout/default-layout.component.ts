@@ -12,7 +12,8 @@ export class DefaultLayoutComponent implements OnInit {
   constructor(private AuthenticationService : AuthenticationService) { }
 
 	public sidebarMinimized = false;
-	public navItems = {};
+  public navItems = {};
+  public currentUser:any;
 	
   ngOnInit() {
     console.log('test');
@@ -28,7 +29,7 @@ export class DefaultLayoutComponent implements OnInit {
   if(currentUser.role == 2){
 		this.navItems = clientNavItems;
 	}
-	console.log('login-user', JSON.parse(localStorage.getItem('currentUser')));
+	this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   
 

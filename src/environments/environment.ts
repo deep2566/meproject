@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://php72-dev5.ezxdemo.com/collector_backend/public/api/',
+  //apiUrl: 'http://collector.fuelgcc.com/public/api/'
+  apiUrl: 'http://php72-dev5.ezxdemo.com/collector_backend/public/api/'
 };

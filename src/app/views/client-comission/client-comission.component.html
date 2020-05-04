@@ -32,6 +32,9 @@
         <thead>
           <tr>
             <th >
+              <mfDefaultSorter by="name">Collection Number</mfDefaultSorter>
+            </th>
+            <th >
               <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
             </th>
             <th >
@@ -59,6 +62,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of mf.data">
+            <td>#{{item.collection_id}}</td>
             <td>{{item.client_name}}</td>
             <td>{{item.collector_name}}</td>
             <td>{{item.debtor_name}}</td>
