@@ -14,6 +14,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { TokenInterceptor } from '../../token.interceptor';
 import { CollectorComissionComponent } from './collector-comission.component';
 import { CollectorComissionRoutingModule } from './collector-comission-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 //
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { CollectorComissionRoutingModule } from './collector-comission-routing.m
     LaddaModule,
     ToasterModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     CollectorComissionComponent,

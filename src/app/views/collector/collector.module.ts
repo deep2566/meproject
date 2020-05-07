@@ -18,6 +18,7 @@ import { CollectorEditModule } from './collector-edit/collector-edit.module';
 import { ToasterModule } from 'angular2-toaster';
 import { LaddaModule } from 'angular2-ladda';
 import { TokenInterceptor } from '../../token.interceptor';
+import { TranslateModule } from '@ngx-translate/core';
 //
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { TokenInterceptor } from '../../token.interceptor';
     CollectorAddModule,
     CollectorEditModule,
     ToasterModule,
-    LaddaModule
+    LaddaModule,
+    TranslateModule
   ],
   declarations: [
     CollectorComponent,

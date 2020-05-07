@@ -75,3 +75,80 @@ export const navItems: INavData[] = [
     ]
   },
 ];
+
+
+export const navItemsAR: INavData[] = [
+  {
+    name: 'لوحة القيادة',
+    url: '/dashboard',
+    icon: 'fa fa-home'
+  },
+
+  {
+    name: 'مجموعات',
+    url: '/collections',
+    icon: 'fa fa-balance-scale',
+  },
+
+  {
+    name: 'الإعدادات',
+    url: '/apps',
+    icon: 'icon-settings',
+    children: [
+      {
+        name: 'إدارة ملف التعريف',
+        icon: 'icon-speechs',
+        children: [
+          {
+            name: 'الملف الشخصي لهواة الجمع',
+            url: '/collector',
+            icon: 'icon-speechs'
+            
+          },
+          {
+            name: 'صفحة الزبون الشخصية',
+            url: '/clients',
+            icon: 'icon-speechs'
+            
+          }
+        ]
+      },
+      {
+        name: 'ادارة المستخدمين',
+        url: '/users',
+        icon: 'icon-user',
+      },
+
+      {
+        name: 'إدارة الإجراءات',
+        url: '/action-type',
+        children: [
+          {
+            name: 'نوع الإجراء',
+            url: '/action-type',
+            
+          }
+        ]
+      }
+
+
+    ]
+  },
+  {
+    name: 'فواتير',
+    icon: 'fa fa-file-picture-o',
+    url: '/invoice',
+    children: [
+      {
+        name: 'لجنة العميل',
+        url: '/client-comission',
+        icon: 'icon-stara'
+      },
+      {
+        name: 'لجنة جامع',
+        url: '/collector-comission',
+        icon: 'icon-stara'
+      }
+    ]
+  },
+];

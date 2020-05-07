@@ -14,6 +14,7 @@ import { ActionTypeRoutingModule } from './action-type-routing.module';
 import { ActionTypeComponent } from './action-type.component';
 import { ToasterModule } from 'angular2-toaster';
 import { ActionAddComponent } from './action-add/action-add.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ActionAddComponent } from './action-add/action-add.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TranslateModule
   ]
 })
 export class ActionTypeModule { }

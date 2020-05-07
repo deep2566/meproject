@@ -3,87 +3,87 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <i class="icon-note"></i> Add New Client
+          <i class="icon-note"></i> {{'Add New Client' | translate}}
 
           <div class="card-header-actions">
-             <button (click)="back()" class="btn btn-block btn-info btn-sm">Back</button>
+             <button (click)="back()" class="btn btn-block btn-info btn-sm">{{'Back' | translate}}</button>
           </div>
         </div>
           <div class="card-body col-md-8">
             <form [formGroup]="angForm" novalidate>
               <div class="form-group">
-                <label for="name" class="col-form-label">Name</label>
+                <label for="name" class="col-form-label">{{'Name' | translate}}</label>
                 <input type="text" class="form-control" 
                   formControlName="name" 
                   #name />
               </div>
               <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['name'].errors.required">
-                  Name field is required.
+                  {{'Name field is required' | translate}}.
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Email</label>
+                <label class="col-form-label">{{'Email' | translate}}</label>
                 <input type="text" class="form-control" 
                   formControlName="email" 
                   #email />
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Username</label>
+                <label class="col-form-label">{{'Username' | translate}}</label>
                 <input type="text" class="form-control" 
                   formControlName="username" 
                   #username />
               </div>
               <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['username'].errors.required">
-                  Username field is required.
+                  {{'Username field is required' | translate}}.
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Password</label>
+                <label class="col-form-label">{{Password | translate}}</label>
                 <input type="password" class="form-control" 
                   formControlName="password" 
                   #password />
               </div>
               <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['password'].errors.required">
-                  Password field is required.
+                  {{'Password field is required' | translate}}.
                 </div>
               </div>
 
               <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['email'].errors.required">
-                  Email field is required.
+                  {{'Email field is required' | translate}}.
                 </div>
                 <div *ngIf="angForm.controls['email'].errors.email">
-                  Please enter valid email address.
+                  {{'Please enter valid email address' | translate}}.
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Phone</label>
+                <label class="col-form-label">{{'Phone' | translate}}</label>
                 <input type="text" class="form-control" 
                   formControlName="phone" 
                   #phone />
               </div>
               <div *ngIf="angForm.controls['phone'].invalid && (angForm.controls['phone'].dirty || angForm.controls['phone'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['phone'].errors.required">
-                  Phone field is required.
+                  {{'Phone field is required' | translate}}.
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Address</label>
+                <label class="col-form-label">{{'Address' | translate}}</label>
                 <input type="text" class="form-control" 
                   formControlName="address" 
                   #address />
               </div>
               <div *ngIf="angForm.controls['address'].invalid && (angForm.controls['address'].dirty || angForm.controls['address'].touched)" class="alert alert-danger">
                 <div *ngIf="angForm.controls['address'].errors.required">
-                  Address field is required.
+                  {{'Address field is required' | translate}}.
                 </div>
               </div>
 
@@ -101,9 +101,9 @@
               <div class="form-group">
                   <button [ladda]='loading' (click) = "add(name.value,email.value,phone.value,address.value,username.value,password.value)"  type="submit" class="btn btn-primary"
                   [disabled]="angForm.pristine || angForm.invalid" >
-                  Submit
+                  {{'Submit' | translate}}
                   </button>
-                  <button class="btn btn-danger" type="reset" >Reset</button>
+                  <button class="btn btn-danger" type="reset" >{{'Reset' | translate}}</button>
               </div>
             </form>
           </div>

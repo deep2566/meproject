@@ -6,6 +6,18 @@
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="false"
 >
+<span class="form-inline">
+  <select 
+      class="form-control" 
+      #selectedLang 
+      (change)="switchLang(selectedLang.value)">
+    <option *ngFor="let language of translate.getLangs()" 
+      [value]="language"
+      [selected]="language === translate.currentLang">
+      {{ language }}
+    </option>
+  </select>
+</span>
 
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown" dropdown placement="bottom right">
@@ -14,11 +26,13 @@
       </a>
       <p>{{currentUser.name}}</p>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <a class="dropdown-item" [routerLink]="['/logout']"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" [routerLink]="['/logout']"><i class="fa fa-lock"></i> {{'Logout' | translate }}</a>
       </div>
     </li>
   </ul>
+
 </app-header>
+
 <div class="app-body">
   
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">

@@ -3,10 +3,10 @@
 <div class="animated fadeIn">
     <div class="card">
       <div class="card-header">
-        <i class="fa fa-align-justify"></i> Users
+        <i class="fa fa-align-justify"></i> {{'Users' | translate}}
         <div class="card-header-actions">
           <button class="btn btn-primary btn-sm active" [routerLink]="['/user/create']">
-            Add
+            {{'Add' | translate}}
           </button>
         </div>
       </div>
@@ -17,7 +17,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-search"></i></span>
               </div>
-              <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+              <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by name' | translate}}"/>
             </div>
           </div>
         </div>
@@ -34,18 +34,18 @@
           <thead>
             <tr>
               <th>
-                <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                <mfDefaultSorter by="name">{{'Name' | translate}}</mfDefaultSorter>
               </th>
               <th>
-                <mfDefaultSorter by="username">Username</mfDefaultSorter>
+                <mfDefaultSorter by="username">{{'Username' | translate}}</mfDefaultSorter>
               </th>
               <th>
-                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                <mfDefaultSorter by="email">{{'Email' | translate}}</mfDefaultSorter>
               </th>
               <th>
-                <mfDefaultSorter by="email">Role</mfDefaultSorter>
+                <mfDefaultSorter by="email">{{'Role' | translate}}</mfDefaultSorter>
               </th>
-              <th>Action</th>
+              <th>{{'Action' | translate}}</th>
             </tr>
           </thead>
           <tbody>
@@ -56,9 +56,9 @@
               <td>{{item.role.role_name}}</td>
             <td>
               <button (click)="dangerModal.show(); setCurrentId(item.id,item)" class="btn btn-danger btn-sm mr-1" data-toggle="modal" type="button">
-                Delete
+                {{'Delete' | translate}}
               </button>
-                <a [routerLink]="['/edit', item.id]" class="btn btn-sm btn-primary active">Edit</a>
+                <a [routerLink]="['/edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a>
             </td>
             </tr>
           </tbody>
@@ -78,17 +78,17 @@
     <div class="modal-dialog modal-danger" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Delete User</h4>
+          <h4 class="modal-title">{{'Delete User' | translate}}</h4>
           <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Are you sure want to delete this User ?</p>
+          <p>{{'Are you sure want to delete this User ?' | translate}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">No</button>
-          <button (click) = "deleteProduct(currentId)" type="button" class="btn btn-danger btn-ladda" [ladda]='isLoadingDelete'>Yes</button>
+          <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">{{'No' | translate}}</button>
+          <button (click) = "deleteProduct(currentId)" type="button" class="btn btn-danger btn-ladda" [ladda]='isLoadingDelete'>{{'Yes' | translate}}</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -16,6 +16,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { ModalModule } from 'ngx-bootstrap';
 import { LaddaModule } from 'angular2-ladda';
 //
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { LaddaModule } from 'angular2-ladda';
     ReactiveFormsModule,
     ToasterModule,
     ModalModule.forRoot(),
-    LaddaModule
+    LaddaModule,
+    TranslateModule
   ],
   declarations: [
     ProductGetComponent,

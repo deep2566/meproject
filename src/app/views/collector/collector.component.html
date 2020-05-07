@@ -2,10 +2,10 @@
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Collectors
+      <i class="fa fa-align-justify"></i> {{'Collectors' | translate}}
       <div class="card-header-actions">
         <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
-          Add
+          {{'Add' | translate}}
         </button>
       </div>
     </div>
@@ -16,7 +16,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by name' | translate}}"/>
           </div>
         </div>
       </div>
@@ -33,25 +33,25 @@
         <thead>
           <tr>
             <th style="width: 10%">
-              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Name' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+              <mfDefaultSorter by="email">{{'Email' | translate}}</mfDefaultSorter>
             </th>
             <!-- <th style="width: 10%">
               <mfDefaultSorter by="id_copy">ID Copy</mfDefaultSorter>
             </th> -->
             <th style="width: 10%">
-              <mfDefaultSorter by="dob">Date of Birth</mfDefaultSorter>
+              <mfDefaultSorter by="dob">{{'Date of Birth' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="id_number">ID No.</mfDefaultSorter>
+              <mfDefaultSorter by="id_number">{{'ID No.' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="start_date">Start Date</mfDefaultSorter>
+              <mfDefaultSorter by="start_date">{{'Start Date' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="city">Action</mfDefaultSorter>
+              <mfDefaultSorter by="city">{{'Action' | translate}}</mfDefaultSorter>
             </th>
 
           </tr>
@@ -65,7 +65,7 @@
             <td>{{ item.id_number}}</td>
             <td>{{ item.start_date}}</td>
             <td>
-              <a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">Edit</a>
+              <a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a>
             </td>
           </tr>
         </tbody>
@@ -81,10 +81,10 @@
       <form (ngSubmit)="onSubmit()" ngNativeValidate>
         <div class="card">
           <div class="card-header">
-            Collector Fee: 
+            {{'Collector Fee' | translate}}: 
             <div class="card-header-actions">
               <button [disabled]="isDisable" [ladda]='feeSaveloader' type="submit" class="btn btn-pill btn-block btn-primary active">
-                Save
+                {{'Save' | translate}}
               </button>
             </div>
           </div>
@@ -92,9 +92,9 @@
             <table class="table table-bordered"  *ngIf="!showChildSpinnner">
               <thead>
                 <tr>
-                  <th>Start amount</th>
-                  <th>End amount</th>
-                  <th>Comission(%)</th>
+                  <th>{{'Start amount' | translate}}</th>
+                  <th>{{'End amount' | translate}}</th>
+                  <th>{{'Comission' | translate}}(%)</th>
                 </tr>
               </thead>
               <tbody>

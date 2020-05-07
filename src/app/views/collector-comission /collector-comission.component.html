@@ -1,11 +1,10 @@
-
 <div class="animated fadeIn" >
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Collector Comission
+      <i class="fa fa-align-justify"></i> {{'Collector Comission' | translate}}
       <div class="card-header-actions">
         <button *ngIf="currentUser.role==1" (click)="downloadCollection()" class="btn btn-primary btn-sm active">
-          <i  class="cui-cloud-download icons"></i> Download
+          <i  class="cui-cloud-download icons"></i> {{'Download' | translate}}
         </button>
       </div>
     </div>
@@ -17,7 +16,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Collector Name"/>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by Collector Name' | translate}}"/>
           </div>
         </div>
       </div>
@@ -32,30 +31,30 @@
         <thead>
           <tr>
             <th >
-              <mfDefaultSorter by="name">Collection Id</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Collection Id' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Client Name' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="collector_name">Collector Name</mfDefaultSorter>
+              <mfDefaultSorter by="collector_name">{{'Collector Name' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="debtor_name">Debtor Name</mfDefaultSorter>
+              <mfDefaultSorter by="debtor_name">{{'Debtor Name' | translate}}</mfDefaultSorter>
             </th>
 
 
             <th >
-              <mfDefaultSorter by="paid_amount">Collected Amount</mfDefaultSorter>
+              <mfDefaultSorter by="paid_amount">{{'Collected Amount' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="fee_collect">Collection Fee</mfDefaultSorter>
+              <mfDefaultSorter by="fee_collect">{{'Collection Fee' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="fee_collect">Created</mfDefaultSorter>
+              <mfDefaultSorter by="fee_collect">{{'Created' | translate}}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter>Action</mfDefaultSorter>
+              <mfDefaultSorter>{{'Action' | translate}}</mfDefaultSorter>
             </th>
 
           </tr>
@@ -73,10 +72,10 @@
             <td>
               <div class="btn-group" dropdown [autoClose]="true">
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                  Action<span class="caret"></span>
+                  {{'Action' | translate}}<span class="caret"></span>
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">Make Invoice</a></li>
+                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">{{'Make Invoice' | translate}}</a></li>
                 </ul>
               </div>
             </td>

@@ -10,6 +10,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { LaddaModule } from 'angular2-ladda';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ClientEditComponent } from './client-edit.component'; 
+import { TranslateModule } from '@ngx-translate/core';
 //
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ClientEditComponent } from './client-edit.component';
     ReactiveFormsModule,
     ToasterModule,
     LaddaModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    TranslateModule
   ],
   declarations:[ClientEditComponent]
 })

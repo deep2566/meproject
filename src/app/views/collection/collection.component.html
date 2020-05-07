@@ -2,14 +2,17 @@
 <div class="animated fadeIn" >
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Collections
+      <i class="fa fa-align-justify"></i> {{'Collections' | translate}}
       <div class="card-header-actions">
       
         <button *ngIf="currentUser.role==1"  (click)="downloadCollection()" class="btn btn-primary btn-sm active">
-          <i  class="cui-cloud-download icons"></i> Download
+          <i  class="cui-cloud-download icons"></i> {{'Download' | translate}}
+        </button>
+        <button *ngIf="currentUser.role==1"  (click)="importModal.show()" class="btn btn-primary btn-sm active">
+          <i  class="cui-cloud-upload icons"></i> {{'Import' | translate}}
         </button>
         <button *ngIf="currentUser.role==1" class="btn btn-primary btn-sm active" [routerLink]="['create']">
-          Add
+          {{'Add' | translate }}
         </button>
       </div>
     </div>
@@ -21,7 +24,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Collector Name"/>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by Collector Name' | translate}}"/>
           </div>
         </div>
       </div>
@@ -36,31 +39,31 @@
         <thead>
           <tr>
             <th>
-              <mfDefaultSorter by="name">Collection Id</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Collection Id' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="name">Client Name</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Client Name' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="collector_name">Collector Name</mfDefaultSorter>
+              <mfDefaultSorter by="collector_name">{{'Collector Name' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="debtor_name">Debtor Name</mfDefaultSorter>
+              <mfDefaultSorter by="debtor_name">{{'Debtor Name' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="amount">Amount</mfDefaultSorter>
+              <mfDefaultSorter by="amount">{{'Amount' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="remaining_amount">R. Amount</mfDefaultSorter>
+              <mfDefaultSorter by="remaining_amount">{{'R. Amount' | translate }}</mfDefaultSorter>
             </th>
             <th >
-              <mfDefaultSorter by="collected_amount">Collected Amount</mfDefaultSorter>
+              <mfDefaultSorter by="collected_amount">{{'Collected Amount' | translate }}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="description">Description</mfDefaultSorter>
+              <mfDefaultSorter by="description">{{'Description' | translate }}</mfDefaultSorter>
             </th>
-            <th *ngIf="currentUser.role==1">
-              <mfDefaultSorter>Action</mfDefaultSorter>
+            <th *ngIf="currentUser.role==1 || currentUser.role==3">
+              <mfDefaultSorter>{{'Action' | translate }}</mfDefaultSorter>
             </th>
 
           </tr>
@@ -75,15 +78,15 @@
             <td>{{item.amount - item.collected_amount }}</td>
             <td>{{item.collected_amount}}</td>
             <td>{{item.description}}</td>
-            <td *ngIf="currentUser.role==1">
+            <td *ngIf="currentUser.role==1 || currentUser.role==3">
               <div class="btn-group" dropdown [autoClose]="true">
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                  Action<span class="caret"></span>
+                  {{'Action' | translate }}<span class="caret"></span>
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['edit', item.id]">Edit</a></li>
-                  <li *ngIf="currentUser.role != 3"><a  class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
-                  <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="amountModal.show()">Add Payment</a></li>
+                  <li *ngIf="currentUser.role != 3" role="menuitem"><a class="dropdown-item" [routerLink]="['edit', item.id]">{{'Edit' | translate }}</a></li>
+                  <li *ngIf="currentUser.role != 3"><a  class="dropdown-item" (click)="delete(item.id)">{{'Delete' | translate }}</a></li>
+                  <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="amountModal.show()">{{'Add Payment' | translate }}</a></li>
                 </ul>
               </div>
             </td>
@@ -100,30 +103,30 @@
 <div class="animated fadeIn" >
   <div class="card">
     <div class="card-header">
-      Collection Detail
+      {{'Collection Detail' | translate }}
     </div>
     <div class="card-body"> 
       <div *ngIf="(currentItem | json) != ({} | json)">
 
         <tabset>
-          <tab heading="Debtor Information">
+          <tab heading="{{'Debtor Information' | translate}}">
             <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
-              Add Phone
+              {{'Add Phone' | translate }}
             </button>
            
             <table class="table table-bordered">
 
               <tbody>
                 <tr>
-                  <th>Debtor Name : </th>
+                  <th>{{'Debtor Name' | translate }} : </th>
                   <td>{{ currentItem.debtor_name}}</td>
                 </tr>
                 <tr>
-                  <th>Debtor Email : </th>
+                  <th>{{'Debtor Email' | translate }} : </th>
                   <td>{{ currentItem.debtor_email}}</td>
                 </tr>
                 <tr>
-                  <th>Debtor Phone:</th>
+                  <th>{{'Debtor Phone' | translate }}:</th>
                   <td>
                     {{ currentItem.debtor_phone}}
                     <i *ngFor="let item of currentItem.debt_phone">
@@ -132,54 +135,54 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>Amount Collect From Debtor:</th>
+                  <th>{{'Amount Collect From Debtor' | translate }}:</th>
                   <td>{{ currentItem.amount}}</td>
                 </tr>
                 <tr>
-                  <th>Supporting Documents:</th>
+                  <th>{{'Supporting Documents' | translate }}:</th>
                   <td>{{currentItem.is_provide_documents === 1 ? 'Yes' : 'No'}} </td>
                 </tr>
                 <tr>
-                  <th>Supporting Legal Procedure:</th>
+                  <th>{{'Supporting Legal Procedure' | translate }}:</th>
                   <td>{{ currentItem.is_legal_procedure === 1 ? 'Yes' : 'No'}}</td>
                 </tr>
               </tbody>
             </table>
           </tab>
-          <tab heading="Client Information">
+          <tab heading="{{'Client Information' | translate}}">
             <table class="table table-bordered">
               <tbody>
                 <tr>
-                  <th width="30%">Client Name : </th>
+                  <th width="30%">{{'Client Name' | translate }} : </th>
                   <td>{{ currentItem.client_detail.name}}</td>
                 </tr>
                 <tr>
-                  <th>Client Email : </th>
+                  <th>{{'Client Email' | translate }} : </th>
                   <td>{{ currentItem.client_detail.email}}</td>
                 </tr>
                 <tr>
-                  <th>Client Phone:</th>
+                  <th>{{'Client Phone' | translate }}:</th>
                   <td>{{ currentItem.client_detail.phone}}</td>
                 </tr>
                 <tr>
-                  <th>Client Address:</th>
+                  <th>{{'Client Address' | translate }}:</th>
                   <td>{{ currentItem.client_detail.address}}</td>
                 </tr>
               </tbody>
             </table>
           </tab>
-          <tab heading="Actions">
-            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="actionModal.show()">
-              Add Action
+          <tab heading="{{'Actions' | translate}}">
+            <button *ngIf="currentUser.role==1 || currentUser.role==3" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="actionModal.show()">
+              {{'Add Action' | translate }}
             </button>
             <table class="table">
               <thead>
                 <tr>
-                  <th>Level 1</th>
-                  <th>Level 2</th>
-                  <th>Level 3</th>
-                  <th>Notes</th>
-                  <th>Created At</th>
+                  <th>{{'Level 1' | translate }}</th>
+                  <th>{{'Level 2' | translate }}</th>
+                  <th>{{'Level 3' | translate }}</th>
+                  <th>{{'Notes' | translate }}</th>
+                  <th>{{'Created At' | translate }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -193,14 +196,14 @@
               </tbody>
             </table>
           </tab>
-          <tab heading="Attachements">
+          <tab heading="{{'Attachements' | translate}}">
             <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
-              Add Attachment
+              {{'Add Attachment' | translate }}
             </button>
               <table class="table">
                 <tbody>
                   <tr *ngFor="let item of currentItem.attachment; let i = index">
-                    <th>Attachment {{i+1}}:</th>
+                    <th>{{'Attachment' | translate }} {{i+1}}:</th>
                     <td><i (click)="download(item.id)" class="cui-cloud-download icons font-2xl d-block mt-4"></i>{{ item.file}}</td>
                   </tr>
                 </tbody>
@@ -217,7 +220,7 @@
     <form [formGroup]="phoneaddForm">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add Phone No</h4>
+          <h4 class="modal-title">{{'Add Phone No' | translate }}</h4>
           <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -225,20 +228,20 @@
 
         <div class="modal-body">
             <div class="form-group">
-              <label for="name" class="col-form-label">Phone Number</label>
+              <label for="name" class="col-form-label">{{'Phone Number' | translate }}</label>
               <input  formControlName="phone"  type="number" class="form-control"  
                 #phone />
             </div>
             <div *ngIf="phoneaddForm.controls['phone'].invalid && (phoneaddForm.controls['phone'].dirty || phoneaddForm.controls['phone'].touched)" class="alert alert-danger">
               <div *ngIf="phoneaddForm.controls['phone'].errors.required">
-                Please enter Phone number.
+                {{'Please enter Phone number' | translate }}.
               </div>
             </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide();">Close</button>
-          <button [disabled]="phoneaddForm.pristine || phoneaddForm.invalid" (click) = "addPhone(phone.value,currentItem.id)" type="submit" [ladda]='savebuttonLoader' class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide();">{{'Close' | translate }}</button>
+          <button [disabled]="phoneaddForm.pristine || phoneaddForm.invalid" (click) = "addPhone(phone.value,currentItem.id)" type="submit" [ladda]='savebuttonLoader' class="btn btn-primary">{{'Save' | translate }}</button>
         </div>
 
       </div>
@@ -253,7 +256,7 @@
     <form #actionaddForm="ngForm" ngNativeValidate>
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add action </h4>
+          <h4 class="modal-title">{{'Add action' | translate }} </h4>
           <button type="button" class="close" (click)="actionModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -261,32 +264,32 @@
 
         <div class="modal-body">
             <div class="form-group">
-              <label for="name" class="col-form-label">Level 1</label>
+              <label for="name" class="col-form-label">{{'Level 1' | translate }}</label>
               <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionOne($event.target.value)" [(ngModel)]="level_one" #level1> 
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="name" class="col-form-label">Level 2</label>
+              <label for="name" class="col-form-label">{{'Level 2' | translate }}</label>
               <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionTwo($event.target.value)" [(ngModel)]="level_two" #level2>
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="name" class="col-form-label">Level 3</label>
+              <label for="name" class="col-form-label">{{'Level 3' | translate }}</label>
               <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionThree($event.target.value)" [(ngModel)]="level_three" #level3>
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="name" class="col-form-label">Description</label>
+              <label for="name" class="col-form-label">{{'Description' | translate }}</label>
               <textarea required rows="5" class="form-control" #description></textarea>
             </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click(click)="actionModal.hide()">Close</button>
-          <button [disabled]="false" type="submit" [ladda]='savebuttonLoader' (click) = "addAction(level_one,level_two,level_three,description.value,currentItem.id)" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" (click(click)="actionModal.hide()">{{'Close' | translate }}</button>
+          <button [disabled]="false" type="submit" [ladda]='savebuttonLoader' (click) = "addAction(level_one,level_two,level_three,description.value,currentItem.id)" class="btn btn-primary">{{'Save changes' | translate }}</button>
         </div>
 
       </div>
@@ -302,7 +305,7 @@
     <form [formGroup]="form" (ngSubmit)="submitAttachment(currentItem.id)" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Attach File</h4>
+          <h4 class="modal-title">{{'Attach File' | translate }}</h4>
           <button type="button" class="close" (click)="attachModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -310,14 +313,14 @@
 
         <div class="modal-body">
             <div class="form-group">
-              <label for="name" class="col-form-label">File</label>
+              <label for="name" class="col-form-label">{{'File' | translate }}</label>
               <input  type="file" class="form-control" (change)="uploadFile($event)" />
             </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="attachModal.hide()">Close</button>
-          <button [disabled]="false" type="submit"  class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" (click)="attachModal.hide()">{{'Close' | translate }}</button>
+          <button [disabled]="false" type="submit"  class="btn btn-primary">{{'Save changes' | translate }}</button>
         </div>
 
       </div>
@@ -332,7 +335,7 @@
     <form [formGroup]="amountaddForm">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add Amount</h4>
+          <h4 class="modal-title">{{'Add Amount' | translate }}</h4>
           <button type="button" class="close" (click)="amountModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -340,26 +343,62 @@
 
         <div class="modal-body">
           <div class="form-group">
-            <label class="col-form-label">Amount</label>
+            <label class="col-form-label">{{'Amount' | translate }}</label>
             <input type="text" class="form-control" 
               formControlName="clamount" 
               #clamount />
           </div>
           <div *ngIf="amountaddForm.controls['clamount'].invalid && (amountaddForm.controls['clamount'].dirty || amountaddForm.controls['clamount'].touched)" class="alert alert-danger">
             <div *ngIf="amountaddForm.controls['clamount'].errors.required">
-              Please enter Collected Amout
+              {{'Please enter Collected Amout' | translate }}
             </div>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="amountModal.hide()">Close</button>
-          <button [disabled]="amountaddForm.pristine || amountaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addAmount(amountaddForm.value,currentItem.id)" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" (click)="amountModal.hide()">{{'Close' | translate }}</button>
+          <button [disabled]="amountaddForm.pristine || amountaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addAmount(amountaddForm.value,currentItem.id)" class="btn btn-primary">{{'Add' | translate }}</button>
         </div>
 
       </div>
-   </form>
-    
+   </form>   
+   
+  </div>
+</div>
+
+<div bsModal #importModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="importCollectionForm" (ngSubmit)="submitExcel()" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{'Import excel' | translate }}</h4>
+          <button type="button" class="close" (click)="importModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label">{{'Browse' | translate }}</label>
+            <input type="file" class="form-control" formControlName="importCollection" #importCollection (change)="uploadExcel($event)" />
+          </div>
+          <div *ngIf="importCollectionForm.controls['importCollection'].invalid && (importCollectionForm.controls['importCollection'].dirty || importCollectionForm.controls['importCollection'].touched)" class="alert alert-danger">
+            <div *ngIf="importCollectionForm.controls['importCollection'].errors.required">
+              {{'Please upload excel' | translate }}
+            </div>
+            <div *ngIf="importCollectionForm.controls['importCollection'].errors.requiredFileType">
+              {{'Invalid Extension' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="importModal.hide()">{{'Close' | translate }}</button>
+          <button [disabled]="importCollectionForm.pristine || importCollectionForm.invalid" type="submit" [ladda]='savebuttonLoader' class="btn btn-primary">{{'Import' | translate }}</button>
+        </div>
+
+      </div>
+   </form>   
    
   </div>
 </div>

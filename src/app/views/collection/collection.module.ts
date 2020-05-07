@@ -17,6 +17,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { CollectionAddModule } from './collection-add/collection-add.module';
 import { CollectionEditModule } from './collection-edit/collection-edit.module';
 import { TokenInterceptor } from '../../token.interceptor';
+import { TranslateModule } from '@ngx-translate/core';
 //
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { TokenInterceptor } from '../../token.interceptor';
     ReactiveFormsModule,
     CollectionAddModule,
     CollectionEditModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     CollectionComponent,

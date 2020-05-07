@@ -2,10 +2,10 @@
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-align-justify"></i> Clients
+      <i class="fa fa-align-justify"></i> {{'Clients' | translate}}
       <div class="card-header-actions">
         <button class="btn btn-primary btn-sm active" [routerLink]="['create']">
-          Add
+          {{'Add' | translate}}
         </button>
       </div>
     </div>
@@ -16,7 +16,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by name' | translate}}"/>
           </div>
         </div>
       </div>
@@ -33,19 +33,19 @@
         <thead>
           <tr>
             <th style="width: 20%">
-              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+              <mfDefaultSorter by="name">{{'Name' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 20%">
-              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+              <mfDefaultSorter by="email">{{'Email' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="phone">Phone</mfDefaultSorter>
+              <mfDefaultSorter by="phone">{{'Phone' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 40%">
-              <mfDefaultSorter by="address">Address</mfDefaultSorter>
+              <mfDefaultSorter by="address">{{'Address' | translate}}</mfDefaultSorter>
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="id_no">Action</mfDefaultSorter>
+              <mfDefaultSorter by="id_no">{{'Action' | translate}}</mfDefaultSorter>
             </th>
           </tr>
         </thead>
@@ -55,7 +55,7 @@
             <td>{{item.email}}</td>
             <td>{{item.phone}}</td>
             <td>{{ item.address}}</td>
-            <td><a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">Edit</a></td>
+            <td><a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a></td>
           </tr>
         </tbody>
         <tfoot>
@@ -70,10 +70,10 @@
       <form (ngSubmit)="onSubmit()" ngNativeValidate>
         <div class="card">
           <div class="card-header">
-            Client Fee: 
+            {{'Client Fee' | translate}}: 
             <div class="card-header-actions">
               <button [disabled]="isDisable" [ladda]='feeSaveloader' type="submit" class="btn btn-pill btn-block btn-primary active">
-                Save
+                {{'Save' | translate}}
               </button>
             </div>
           </div>
@@ -81,12 +81,12 @@
             <table class="table table-bordered"  *ngIf="!showChildSpinnner">
               <thead>
                 <tr>
-                  <th>Start Amount</th>
-                  <th>End Amount</th>
-                  <th>Percentage(Without Legal:With Doc)</th>
-                  <th>Percentage(Without Legal:Without Doc)</th>
-                  <th>Percentage(With Legal:With Doc)</th>
-                  <th>Percentage(With Legal:Without Doc)</th>
+                  <th>{{'Start Amount' | translate}}</th>
+                  <th>{{'End Amount' | translate}}</th>
+                  <th>{{'Percentage(Without Legal:With Doc)' | translate}}</th>
+                  <th>{{'Percentage(Without Legal:Without Doc)' | translate}}</th>
+                  <th>{{'Percentage(With Legal:With Doc)' | translate}}</th>
+                  <th>{{'Percentage(With Legal:Without Doc)' | translate}}</th>
                 </tr>
               </thead>
               <tbody>

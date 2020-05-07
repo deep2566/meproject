@@ -17,6 +17,9 @@ import { ClientAddModule } from './client-add/client-add.module';
 import { ClientEditModule } from './client-edit/collector-edit.module';
 import { TokenInterceptor } from '../../token.interceptor';
 //
+
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     ClientRoutingModule,
@@ -27,7 +30,8 @@ import { TokenInterceptor } from '../../token.interceptor';
     ToasterModule,
     LaddaModule,
     ClientAddModule,
-    ClientEditModule
+    ClientEditModule,
+    TranslateModule
   ],
   declarations: [
     ClientComponent,

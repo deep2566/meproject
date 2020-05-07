@@ -6,6 +6,9 @@ import { FormGroup, FormBuilder, Validators, NgForm,ReactiveFormsModule } from '
 import { Router,ActivatedRoute } from '@angular/router';
 import {AlertService } from '../notifications/alert.service';
 import { environment } from '../../../environments/environment';
+import * as XLSX from 'xlsx';
+
+
 
 
 @Component({
@@ -26,6 +29,7 @@ export class CollectionComponent {
   @ViewChild('actionModal', {static: false}) public actionModal: ModalDirective;
   @ViewChild('attachModal', {static: false}) public attachModal: ModalDirective;
   @ViewChild('amountModal', {static: false}) public amountModal: ModalDirective;
+  @ViewChild('importModal', {static: false}) public importModal: ModalDirective;
  
   error: any;
   public data: any;
@@ -43,6 +47,7 @@ export class CollectionComponent {
   form: FormGroup;
   amountaddForm: FormGroup;
   phoneaddForm:FormGroup;
+  importCollectionForm:FormGroup;
 
   constructor(private alertService: AlertService, private router: Router,public fb: FormBuilder,private toasterService: ToasterService,private CollectionService: CollectionService) {
       this.CollectionService.getData()
@@ -65,6 +70,10 @@ export class CollectionComponent {
 
       this.amountaddForm = this.fb.group({
         clamount: ['', Validators.required ]
+      });
+
+      this.importCollectionForm = this.fb.group({
+        importCollection: ['', [Validators.required, this.CollectionService.requiredFileType() ]]
       });
 
       this.form = this.fb.group({
@@ -230,6 +239,48 @@ export class CollectionComponent {
       this.amountModal.hide();
       this.getCollectionsData();
     }
+  }  
+
+  uploadExcel(event){
+    const excelFile = (event.target as HTMLInputElement).files[0];
+    let reader = new FileReader();  
+    const shortlistsRow = []
+    reader.onload = (e)=> {  
+      let data = (<any>e.target).result;  
+      let workbook = XLSX.read(data, {  
+        type: 'binary'  
+      });  
+
+      workbook.SheetNames.forEach((name) => {
+        const sheet = workbook.Sheets[name];
+        let XL_row_object = XLSX.utils.sheet_to_json(sheet);
+        XL_row_object.forEach(function(row){
+          shortlistsRow.push(row)
+        });
+      }, {}); 
+      
+      localStorage.setItem('excelData', JSON.stringify(shortlistsRow));     
+    };
+    reader.onerror = function(ex) {  
+      console.log(ex);  
+    };  
+    reader.readAsBinaryString(excelFile);
   }
 
+  submitExcel() {
+    const excelData = localStorage.getItem('excelData');
+    const th = this
+    JSON.parse(excelData).forEach(function(data, idx, array){
+      th.CollectionService.add(data)
+      .subscribe(data => {
+        if (idx === array.length - 1){ 
+          th.importCollectionForm.reset();
+          th.importModal.hide();
+          th.getCollectionsData();
+          localStorage.removeItem('excelData');
+          th.toasterService.pop('success', 'Action', 'Collections has been added successfully.');
+        }
+      });
+    })
+  }
 }

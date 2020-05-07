@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { throwError, from } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { FormControl } from '@angular/forms';
 
 export interface UserData {
   name: string;
@@ -122,5 +123,24 @@ export class CollectionService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+  requiredFileType() {
+    return function (control: FormControl) {
+      const file = control.value;
+      if ( file ) {
+        const extensions = ['csv','xlsx', 'xlsm', 'xltm', 'xltx' ]        
+        const extension = file.split('.')[1].toLowerCase();
+        if ( extensions.indexOf(extension) == -1 ) {
+          return {
+            requiredFileType: true
+          };
+        }
+        
+        return null;
+      }
+  
+      return null;
+    };
   }
 }

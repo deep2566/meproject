@@ -13,6 +13,7 @@ import { ProductAddComponent } from './product-add.component';
 import { ProductAddRoutingModule } from './product-add-routing.module';
 import { ToasterModule } from 'angular2-toaster';
 import { LaddaModule } from 'angular2-ladda';
+import { TranslateModule } from '@ngx-translate/core';
 //
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { LaddaModule } from 'angular2-ladda';
     HttpClientModule,
     ReactiveFormsModule,
     ToasterModule,
-    LaddaModule
+    LaddaModule,
+    TranslateModule
   ],
   declarations: [
     ProductAddComponent,

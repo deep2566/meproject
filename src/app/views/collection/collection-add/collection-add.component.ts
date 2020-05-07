@@ -69,7 +69,7 @@ export class CollectionAddComponent implements OnInit {
       collector_id: ['', Validators.required ],
       debtor_name: ['', Validators.required ],
       debtor_email: ['', Validators.required ],
-      debtor_phone: ['', Validators.required ],
+      debtor_phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") ]],
       amount: ['', Validators.required ],
       description: ['', Validators.required ],
       is_provide_documents: ['', Validators.required ],
@@ -78,6 +78,7 @@ export class CollectionAddComponent implements OnInit {
   }
 
   add(data) {
+    console.log('collection data')
     console.log(data);
     this.loading =true;
     this.ps.add(data)

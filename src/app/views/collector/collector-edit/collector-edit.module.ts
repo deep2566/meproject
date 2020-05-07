@@ -11,6 +11,7 @@ import { LaddaModule } from 'angular2-ladda';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { CollectorEditComponent } from './collector-edit.component'; 
 //
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import { CollectorEditComponent } from './collector-edit.component';
     ReactiveFormsModule,
     ToasterModule,
     LaddaModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    TranslateModule
   ],
   declarations:[CollectorEditComponent]
 })

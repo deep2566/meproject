@@ -12,6 +12,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { LaddaModule } from 'angular2-ladda';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 //
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +21,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     ToasterModule,
     LaddaModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    TranslateModule
   ],
   declarations: [
     ClientAddComponent

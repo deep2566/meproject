@@ -12,6 +12,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { ModalModule } from 'ngx-bootstrap';
 import { LaddaModule } from 'angular2-ladda';
 import { InvoiceComponent } from './invoice.component';
+import { TranslateModule } from '@ngx-translate/core';
 //
 
 
@@ -25,7 +26,8 @@ import { InvoiceComponent } from './invoice.component';
     ReactiveFormsModule,
     ToasterModule,
     ModalModule.forRoot(),
-    LaddaModule
+    LaddaModule,
+    TranslateModule
   ],
   declarations: [
     InvoiceComponent
