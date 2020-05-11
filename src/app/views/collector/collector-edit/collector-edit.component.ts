@@ -16,6 +16,14 @@ import {AlertService } from '../../notifications/alert.service'
   encapsulation: ViewEncapsulation.None
 })
 export class CollectorEditComponent implements OnInit {
+
+  fields:any =[
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+  ];
  
   loading = false;
   angForm: FormGroup;
@@ -26,6 +34,9 @@ export class CollectorEditComponent implements OnInit {
    bsValue2: Date = new Date();
 
   collector: any = {};
+  res: any ={};
+
+
   constructor(private route: ActivatedRoute,
     private fb: FormBuilder,
     private alertService: AlertService, 
@@ -49,7 +60,7 @@ export class CollectorEditComponent implements OnInit {
   update(name,email,id_number,start_date,dob,id) {
     this.loading = true;
     this.route.params.subscribe(params => {
-      this.ps.update(name,email,id_number,start_date,dob,params.id)
+      this.ps.update(name,email,id_number,start_date,dob,params.id,this.fields)
       .subscribe(res => {
         this.loading = false;
         this.alertService.success('Collector has been updated successfully.', true)
@@ -63,6 +74,15 @@ export class CollectorEditComponent implements OnInit {
     this.route.params.subscribe(params => {
         this.ps.edit(params['id']).subscribe(res => {
           this.collector = res;
+          var v = this.collector.colletor_fee;
+          var count = 0;
+          if(v.length > 0){
+            for (var i = 0; i < v.length; i++){
+              this.fields[i].start_percentage= v[i].start_percentage;
+              this.fields[i].end_percentage= v[i].end_percentage;
+              this.fields[i].comission= v[i].comission;
+            }
+          }
       });
     });
   }

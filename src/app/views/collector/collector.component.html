@@ -32,25 +32,31 @@
       <table *ngIf="!showSpinnner" class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>
           <tr>
-            <th style="width: 10%">
+            <th>
+              <mfDefaultSorter by="collector_id">{{'Collector Id' | translate}}</mfDefaultSorter>
+            </th>
+            <th >
               <mfDefaultSorter by="name">{{'Name' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="email">{{'Email' | translate}}</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="email">{{'Username' | translate}}</mfDefaultSorter>
             </th>
             <!-- <th style="width: 10%">
               <mfDefaultSorter by="id_copy">ID Copy</mfDefaultSorter>
             </th> -->
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="dob">{{'Date of Birth' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="id_number">{{'ID No.' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="start_date">{{'Start Date' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th >
               <mfDefaultSorter by="city">{{'Action' | translate}}</mfDefaultSorter>
             </th>
 
@@ -58,8 +64,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of mf.data" (click)="enableField(item.id)">
+            <td >{{item.id}}</td>
             <td >{{item.name}}</td>
             <td>{{item.email}}</td>
+            <td>{{item.username}}</td>
             <!-- <td class="text-left"></td> -->
             <td>{{item.dob}}</td>
             <td>{{ item.id_number}}</td>
@@ -100,14 +108,14 @@
               <tbody>
                 <tr *ngFor="let item of fields; let index = index">
                   <td>
-                    <input [disabled]="isDisable" required type="number" [ngModelOptions]="{standalone: true}"
+                    <input [disabled]="isDisable" required type="text" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="fields[index].start_percentage" class="form-control"/></td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}" [(ngModel)]="fields[index].end_percentage" class="form-control"/>
                     </td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].comission" class="form-control"/>
                     </td>
                 </tr>

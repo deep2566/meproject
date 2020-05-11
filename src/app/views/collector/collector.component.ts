@@ -15,18 +15,18 @@ export class CollectorComponent {
     timeout: 5000
   });
 
-  /* fields:any =[
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-
-  ]; */
   fields:any =[
-    {start_percentage:'',end_percentage:'',comission:''}
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
+    {start_percentage:'',end_percentage:'',comission:''},
 
   ];
+  // fields:any =[
+  //   {start_percentage:'',end_percentage:'',comission:''}
+
+  // ];
   public showSpinnner =true;
   error: any;
   public data: TableData;
@@ -72,7 +72,7 @@ export class CollectorComponent {
         this.showChildSpinnner = false;
         console.log(response);
           this.fields = response;
-        /* if(response.length == 5){
+         if(response.length > 0){
           this.fields = response;
         }else{
           this.fields = [
@@ -83,7 +83,7 @@ export class CollectorComponent {
             {start_percentage:'',end_percentage:'',comission:''},
         
           ];
-        } */
+        } 
        
       }, // success path
       error => this.error = error // error path

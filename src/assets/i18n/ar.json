@@ -151,5 +151,7 @@
     "Import excel":"استيراد اكسل",
     "Browse":"تصفح",
     "Please upload excel":"يرجى تحميل التفوق",
-    "Invalid Extension":"ملحق غير صالح"
+    "Invalid Extension":"ملحق غير صالح",
+    "Collector Id":"معرف جامع",
+    "Client Id":"معرف العميل"
 }

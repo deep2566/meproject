@@ -17,7 +17,11 @@ import {AlertService } from '../../notifications/alert.service'
   providers:[ClientService]
 })
 export class ClientEditComponent implements OnInit {
- 
+  fields:any =[
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''},
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''},
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''}
+  ];
   loading = false;
   angForm: FormGroup;
 
@@ -49,7 +53,7 @@ export class ClientEditComponent implements OnInit {
   update(name,email,phone,address,id) {
     this.loading = true;
     this.route.params.subscribe(params => {
-      this.ps.update(name,email,phone,address,params.id)
+      this.ps.update(name,email,phone,address,params.id,this.fields)
       .subscribe(res => {
         this.loading = false;
         this.alertService.success('Client has been updated successfully.', true)
@@ -60,9 +64,21 @@ export class ClientEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => { 
         this.ps.edit(params['id']).subscribe(res => {
           this.collector = res;
+          var v = this.collector.client_fee;
+          var count = 0;
+          if(v.length > 0){
+            for (var i = 0; i < v.length; i++){
+              this.fields[i].start_amount= v[i].start_amount;
+              this.fields[i].end_amount= v[i].end_amount;
+              this.fields[i].percentage_with_doc_without_legal= v[i].percentage_with_doc_without_legal;
+              this.fields[i].percentage_without_doc_without_legal= v[i].percentage_without_doc_without_legal;
+              this.fields[i].percentage_with_legal_with_doc= v[i].percentage_with_legal_with_doc;
+              this.fields[i].percentage_with_legal_without_doc= v[i].percentage_with_legal_without_doc;
+            }
+          }
       });
     });
   }

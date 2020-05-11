@@ -38,9 +38,9 @@ export class CollectorService {
     return this.http.get(`${this.collectorFeeUrl}/${id}`);
   }
 
-  add(name,email,password,id_number,start_date,dob,username) {
+  add(name,email,password,id_number,start_date,dob,username,fields) {
     const obj = {
-      name,email,password,id_number,start_date,dob,username
+      name,email,password,id_number,start_date,dob,username,fields
     };
     return this.http.post(`${this.uri}/add`, obj);
   }
@@ -51,9 +51,9 @@ export class CollectorService {
             .get(`${this.uri}/edit/${id}`);
   }
 
-  update(name,email,id_number,start_date,dob,id) {
+  update(name,email,id_number,start_date,dob,id,fields) {
       const obj = {
-        name,email,id_number,start_date,dob
+        name,email,id_number,start_date,dob,fields
       };
      return this
         .http

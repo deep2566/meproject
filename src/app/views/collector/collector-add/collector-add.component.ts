@@ -58,8 +58,9 @@ export class CollectorAddComponent implements OnInit {
 
   add(name,email,password,id_number,start_date,dob,username) {
     console.log('sdfsdfsdfdsfsd');
+    console.log(this.fields);
     this.loading =true;
-    this.ps.add(name,email,password,id_number,start_date,dob,username)
+    this.ps.add(name,email,password,id_number,start_date,dob,username,this.fields)
     .subscribe(data => {
       this.loading = false;
       this.alertService.success('Collector has been added successfully.', true)

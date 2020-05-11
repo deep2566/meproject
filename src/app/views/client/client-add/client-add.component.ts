@@ -19,12 +19,9 @@ import { ClientService } from '../client.service';
 })
 export class ClientAddComponent implements OnInit {
   fields:any =[
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-    {start_percentage:'',end_percentage:'',comission:''},
-
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''},
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''},
+    {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''}
   ];
   
   loading = false;
@@ -59,7 +56,7 @@ export class ClientAddComponent implements OnInit {
   add(name,email,phone,address,username,password) {
     console.log('add call in component');
     this.loading =true;
-    this.ps.add(name,email,phone,address,username,password)
+    this.ps.add(name,email,phone,address,username,password,this.fields)
     .subscribe(data => {
       this.loading = false;
       this.alertService.success('Client has been added successfully.', true)

@@ -242,6 +242,7 @@ export class CollectionComponent {
   }  
 
   uploadExcel(event){
+    localStorage.removeItem('excelData');
     const excelFile = (event.target as HTMLInputElement).files[0];
     let reader = new FileReader();  
     const shortlistsRow = []
@@ -271,16 +272,19 @@ export class CollectionComponent {
     const excelData = localStorage.getItem('excelData');
     const th = this
     JSON.parse(excelData).forEach(function(data, idx, array){
-      th.CollectionService.add(data)
+      th.CollectionService.addExcel(data)
       .subscribe(data => {
+        console.log('idx '+idx);
+        console.log('arraylength '+array.length);
         if (idx === array.length - 1){ 
           th.importCollectionForm.reset();
           th.importModal.hide();
           th.getCollectionsData();
           localStorage.removeItem('excelData');
-          th.toasterService.pop('success', 'Action', 'Collections has been added successfully.');
+          th.toasterService.pop('success', 'Action', 'Collections has been added successfully,only valid collector id and client id inserted.');
         }
       });
     })
+    console.log('final');
   }
 }

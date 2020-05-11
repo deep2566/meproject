@@ -114,6 +114,36 @@
                   bsDatepicker [(bsValue)]="bsValue">
                 </div>
               </div> -->
+              <div>
+                <table class="table table-bordered" >
+                  <thead>
+                    <tr>
+                      <th>{{'Start amount' | translate}}</th>
+                      <th>{{'End amount' | translate}}</th>
+                      <th>{{'Comission' | translate}}(%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of fields; let index = index">
+                      <td>
+                        <input  required type="text" 
+                         class="form-control" [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="fields[index].start_percentage" /></td>
+                      <td>
+                        <input  required type="text"
+                          class="form-control" [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="fields[index].end_percentage"/>
+                        </td>
+                      <td>
+                        <input  required type="text"
+                          class="form-control" [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="fields[index].comission"/>
+                        </td>
+                    </tr>
+    
+                  </tbody>
+                </table>
+              </div>
 
               <div class="form-group">
                   <button [ladda]='loading' (click) = "add(name.value,email.value,password.value,id_number.value,start_date.value,dob.value,username.value)" type="submit" class="btn btn-primary"

@@ -32,27 +32,35 @@
       <table *ngIf="!showSpinnner" class="table table-bordered table-striped table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>
           <tr>
-            <th style="width: 20%">
+            <th>
+              <mfDefaultSorter by="name">{{'Client Id' | translate}}</mfDefaultSorter>
+            </th>
+            <th >
               <mfDefaultSorter by="name">{{'Name' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 20%">
+            <th>
               <mfDefaultSorter by="email">{{'Email' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th>
+              <mfDefaultSorter by="email">{{'Username' | translate}}</mfDefaultSorter>
+            </th>
+            <th>
               <mfDefaultSorter by="phone">{{'Phone' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 40%">
+            <th>
               <mfDefaultSorter by="address">{{'Address' | translate}}</mfDefaultSorter>
             </th>
-            <th style="width: 10%">
+            <th>
               <mfDefaultSorter by="id_no">{{'Action' | translate}}</mfDefaultSorter>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of mf.data" (click)="enableField(item.id)">
+            <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>{{item.email}}</td>
+            <td>{{item.username}}</td>
             <td>{{item.phone}}</td>
             <td>{{ item.address}}</td>
             <td><a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a></td>
@@ -60,7 +68,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="5">
+            <td colspan="7">
               <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
             </td>
           </tr>
@@ -92,26 +100,26 @@
               <tbody>
                 <tr *ngFor="let item of fields; let index = index" >
                   <td>
-                    <input [disabled]="isDisable" required type="number" [ngModelOptions]="{standalone: true}"
+                    <input [disabled]="isDisable" required type="text" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="fields[index].start_amount" class="form-control"/></td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}" [(ngModel)]="fields[index].end_amount" class="form-control"/>
                     </td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_doc_without_legal" class="form-control"/>
                   </td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_without_doc_without_legal" class="form-control"/>
                   </td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_with_doc" class="form-control"/>
                   </td>
                   <td>
-                    <input [disabled]="isDisable" required type="number"
+                    <input [disabled]="isDisable" required type="text"
                      [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_without_doc" class="form-control"/>
                   </td>
                 </tr>

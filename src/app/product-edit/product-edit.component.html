@@ -54,7 +54,7 @@
 
           <div class="form-group">
             <label class="col-form-label">{{'Role' | translate}}</label>
-            <select [(ngModel)] = "user.role"  class="form-control" 
+            <select [disabled]="true" [(ngModel)] = "user.role"  class="form-control" 
             formControlName="role" 
             #role >
             <option value="{{item.id}}" *ngFor="let item of roles">{{ item.role_name}}</option>

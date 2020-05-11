@@ -83,6 +83,10 @@ export class CollectionService {
     return this.http.post(`${this.uri}/add`, data);
   }
 
+  addExcel(data) {
+    return this.http.post(`${this.uri}/add/excel`, data);
+  }
+
   edit(id) {
     return this
             .http
@@ -109,11 +113,13 @@ export class CollectionService {
     return this.http.post(`${this.baseurl}collection/addDebtAmount`,data);
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) { 
     if (error.error instanceof ErrorEvent) {
+      console.log('error1');
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
+      console.log('error2');
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(

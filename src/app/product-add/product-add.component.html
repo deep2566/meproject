@@ -60,7 +60,8 @@
                   <select  class="form-control" 
                     formControlName="role" 
                     #role >
-                    <option value="{{item.id}}" *ngFor="let item of roles">{{ item.role_name}}</option>
+                    <option selected="selected" value="1">Super Admin</option>
+                    <!-- <option  value="{{item.id}}" *ngFor="let item of roles">{{ item.role_name}}</option> -->
                   </select>
                 </div>
                 <div *ngIf="angForm.controls['role'].invalid && (angForm.controls['role'].dirty || angForm.controls['role'].touched)" class="alert alert-danger">

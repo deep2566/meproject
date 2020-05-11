@@ -9,7 +9,7 @@
              <button (click)="back()" class="btn btn-block btn-info btn-sm">{{'Back' | translate}}</button>
           </div>
         </div>
-          <div class="card-body col-md-8">
+          <div class="card-body col-md-12">
             <form [formGroup]="angForm" novalidate>
               <div class="form-group">
                 <label for="name" class="col-form-label">{{'Name' | translate}}</label>
@@ -97,6 +97,49 @@
                   bsDatepicker [(bsValue)]="bsValue">
                 </div>
               </div> -->
+
+              <div>
+                <table class="table table-bordered" >
+                  <thead>
+                    <tr>
+                      <th>{{'Start Amount' | translate}}</th>
+                      <th>{{'End Amount' | translate}}</th>
+                      <th>{{'Percentage(Without Legal:With Doc)' | translate}}</th>
+                      <th>{{'Percentage(Without Legal:Without Doc)' | translate}}</th>
+                      <th>{{'Percentage(With Legal:With Doc)' | translate}}</th>
+                      <th>{{'Percentage(With Legal:Without Doc)' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>  
+                    <tr *ngFor="let item of fields; let index = index" >
+                      <td>
+                        <input [disabled]="isDisable" required type="text" [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="fields[index].start_amount" class="form-control"/></td>
+                      <td>
+                        <input [disabled]="isDisable" required type="text"
+                         [ngModelOptions]="{standalone: true}" [(ngModel)]="fields[index].end_amount" class="form-control"/>
+                        </td>
+                      <td>
+                        <input [disabled]="isDisable" required type="text"
+                         [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_doc_without_legal" class="form-control"/>
+                      </td>
+                      <td>
+                        <input [disabled]="isDisable" required type="text"
+                         [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_without_doc_without_legal" class="form-control"/>
+                      </td>
+                      <td>
+                        <input [disabled]="isDisable" required type="text"
+                         [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_with_doc" class="form-control"/>
+                      </td>
+                      <td>
+                        <input [disabled]="isDisable" required type="text"
+                         [ngModelOptions]="{standalone: true}"  [(ngModel)]="fields[index].percentage_with_legal_without_doc" class="form-control"/>
+                      </td>
+                    </tr>
+    
+                  </tbody>
+                </table>
+              </div>
 
               <div class="form-group">
                   <button [ladda]='loading' (click) = "add(name.value,email.value,phone.value,address.value,username.value,password.value)"  type="submit" class="btn btn-primary"

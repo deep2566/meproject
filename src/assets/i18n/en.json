@@ -144,6 +144,8 @@
     "Import excel":"Import Excel",
     "Browse":"Browse",
     "Please upload excel":"Please upload only excel",
-    "Invalid Extension":"Invalid Extension"
+    "Invalid Extension":"Invalid Extension",
+    "Collector Id":"Collector Id",
+    "Client Id":"Client Id"
 
 }

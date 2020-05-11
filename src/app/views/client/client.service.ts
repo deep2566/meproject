@@ -38,9 +38,9 @@ export class ClientService {
     return this.http.get(`${this.clientFeeUrl}/${id}`);
   }
 
-  add(name,email,phone,address,username,password) {
+  add(name,email,phone,address,username,password,fields) {
     const obj = {
-      name,email,phone,address,username,password
+      name,email,phone,address,username,password,fields
     };
     console.log(obj);
     return this.http.post(`${this.uri}/add`, obj);
@@ -52,9 +52,9 @@ export class ClientService {
             .get(`${this.uri}/edit/${id}`);
   }
 
-  update(name,email,phone,address,id) {
+  update(name,email,phone,address,id,fields) {
       const obj = {
-        name,email,phone,address
+        name,email,phone,address,fields
       };
      return this
         .http
