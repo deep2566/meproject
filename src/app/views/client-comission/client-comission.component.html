@@ -1,4 +1,5 @@
 
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <div class="animated fadeIn" >
   <div class="card">
     <div class="card-header">
@@ -37,9 +38,9 @@
             <th >
               <mfDefaultSorter by="name">{{'Client Name' | translate}}</mfDefaultSorter>
             </th>
-            <th >
+            <!-- <th *ngIf="currentUser.role==1 || currentUser.role==3">
               <mfDefaultSorter by="collector_name">{{'Collector Name' | translate}}</mfDefaultSorter>
-            </th>
+            </th> -->
             <th >
               <mfDefaultSorter by="debtor_name">{{'Debtor Name' | translate}}</mfDefaultSorter>
             </th>
@@ -54,6 +55,7 @@
             <th >
               <mfDefaultSorter by="fee_collect">{{'Created' | translate}}</mfDefaultSorter>
             </th>
+
             <th >
               <mfDefaultSorter>{{'Action' | translate}}</mfDefaultSorter>
             </th>
@@ -61,15 +63,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of mf.data">
+          <tr *ngFor="let item of mf.data" (click)="setCurrentItem(item)">
             <td>#{{item.collection_id}}</td>
             <td>{{item.client_name}}</td>
-            <td>{{item.collector_name}}</td>
+            <!-- <td *ngIf="currentUser.role==1 || currentUser.role==3">{{item.collector_name}}</td> -->
             <td>{{item.debtor_name}}</td>
 
             <td>{{item.paid_amount}}</td>
             <td>{{item.fee}}</td>
+            
             <td>{{item.created}}</td>
+           
             <td>
               <div class="btn-group" dropdown [autoClose]="true">
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -77,12 +81,16 @@
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                   <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">{{'Make Invoice' | translate}}</a></li>
+                  <a class="dropdown-item" (click)="deletePayment(item.id)">
+                    {{'Delete Payment' | translate}}
+                  </a>
+                  <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="commentModal.show()">{{'Add Comment' | translate }}</a></li>
                 </ul>
               </div>
             </td>
           </tr>
         </tbody>
-		<tfoot>
+		    <tfoot>
           <tr>
             <td colspan="8">
               <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
@@ -91,6 +99,43 @@
         </tfoot>
       </table>
     </div>
+  </div>
+</div>
+
+<div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="commentaddForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{'Add Comment' | translate }}</h4>
+          <button type="button" class="close" (click)="commentModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label">{{'Comment' | translate }}</label>
+            <textarea   [(ngModel)] = "currentItem.comments" rows="6" type="text" class="form-control" 
+            formControlName="comment" 
+            #comment></textarea>
+           
+          </div>
+          <div *ngIf="commentaddForm.controls['comment'].invalid && (commentaddForm.controls['comment'].dirty || commentaddForm.controls['comment'].touched)" class="alert alert-danger">
+            <div *ngIf="commentaddForm.controls['comment'].errors.required">
+              {{'Please enter comment' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="commentModal.hide()">{{'Close' | translate }}</button>
+          <button [disabled]="commentaddForm.pristine || commentaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addComment(commentaddForm.value,currentItem.id)" class="btn btn-primary">{{'Add' | translate }}</button>
+        </div>
+
+      </div>
+   </form>   
+   
   </div>
 </div>
 

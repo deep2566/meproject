@@ -31,6 +31,14 @@ export class CollectorComissionService {
       );
   }
 
+  deletePayment(id){
+    return this.http.get(environment.apiUrl+'delete-payment/'+id)
+    .pipe(
+      retry(3), // retry a failed request up to 3 times
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

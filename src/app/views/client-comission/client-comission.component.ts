@@ -1,8 +1,10 @@
-import { Component,ViewEncapsulation } from '@angular/core';
+import { Component,ViewEncapsulation,ViewChild } from '@angular/core';
 import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { environment } from '../../../environments/environment';
 import { ClientComissionService } from './client-comission.service';
-
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import { FormGroup, FormBuilder, Validators, NgForm,ReactiveFormsModule } from '@angular/forms';
+ 
 @Component({
   templateUrl: 'client-comission.component.html',
   providers: [ ToasterService,ClientComissionService ],
@@ -17,6 +19,8 @@ export class ClientComissionComponent {
     timeout: 5000
   });
 
+  @ViewChild('commentModal', {static: false}) public commentModal: ModalDirective;
+
 
   error: any;
   public data: any;
@@ -24,8 +28,12 @@ export class ClientComissionComponent {
   public item:any;
   public showSpinnner = true;
   public currentUser:any;
+  public currentItem ={};
 
-  constructor(private ClientComissionService: ClientComissionService) {
+  form: FormGroup;
+  commentaddForm: FormGroup;
+
+  constructor(private ClientComissionService: ClientComissionService,public fb: FormBuilder,private toasterService: ToasterService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
       this.ClientComissionService.getData()
@@ -38,6 +46,30 @@ export class ClientComissionComponent {
         }, // success path
         error => this.error = error // error path
       );
+
+      this.commentaddForm = this.fb.group({
+        comment: ['', Validators.required ]
+      });
+
+  }
+
+  public reloadData(){
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    this.ClientComissionService.getData()
+    .subscribe(
+      (data) => {
+        setTimeout(() => {
+          this.showSpinnner =false;
+          this.data = [...data];
+          }, 100);
+      }, // success path
+      error => this.error = error // error path
+    );
+
+    this.commentaddForm = this.fb.group({
+      comment: ['', Validators.required ]
+    });
   }
 
   public toInt(num: string) {
@@ -55,6 +87,37 @@ export class ClientComissionComponent {
 
   downloadCollection(){
     window.location.href = environment.apiUrl+'download-client-comission';
+  }
+
+  addComment(data,invoiceId){
+      this.ClientComissionService.addComment(data,invoiceId)
+      .subscribe(data => {
+        console.log('data', data);
+      });
+      this.commentaddForm.reset();
+      this.commentModal.hide();
+      //this.reloadData();
+      this.toasterService.pop('success', 'Comment', 'Comment has been added successfully.');
+    
+  }  
+
+  public setCurrentItem(currentItem) {
+    this.currentItem = currentItem;
+    console.log(currentItem);
+  }
+
+  deletePayment(id) {
+    if(confirm('Are you sure want to delete this payment.?')){
+      this.ClientComissionService.deletePayment(id)
+      .subscribe(data => {
+        for (let item  of this.data) {
+            if (item.id == id) {
+                this.data.splice(this.data.indexOf(item), 1);
+            }      
+        }
+        this.toasterService.pop('success', 'Payment', 'Payment has been deleted successfully.');
+      });
+    }
   }
 
 }

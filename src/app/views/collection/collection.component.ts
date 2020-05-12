@@ -44,6 +44,14 @@ export class CollectionComponent {
   public item:any;
   public currentUser:any;
   public showSpinnner = true;
+  public totalData = {};
+
+  public totalAmount     = 0;
+  public remainingAmount = 0;
+  public collectedAmount = 0;
+
+ 
+
   form: FormGroup;
   amountaddForm: FormGroup;
   phoneaddForm:FormGroup;
@@ -52,7 +60,7 @@ export class CollectionComponent {
   constructor(private alertService: AlertService, private router: Router,public fb: FormBuilder,private toasterService: ToasterService,private CollectionService: CollectionService) {
       this.CollectionService.getData()
       .subscribe(
-        (data) => {
+        (data) =>  {
           setTimeout(() => {
             this.showSpinnner =false;
             this.data = [...data];
@@ -65,6 +73,13 @@ export class CollectionComponent {
       .subscribe(
         (data: any) => {
             this.actions = data;
+        }
+      );
+
+      this.CollectionService.getTotalDetail()
+      .subscribe(
+        (data: any) => {
+            this.totalData = data;
         }
       );
 
@@ -84,7 +99,10 @@ export class CollectionComponent {
         phone: ['', Validators.required ]
       })
 	  
-	  this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+
+    
   }
 
   
@@ -164,9 +182,17 @@ export class CollectionComponent {
   addAction(level_one,level_two,level_three,notes,collection_id) { 
     console.log('level one value get');
 
-    console.log(level_one);
+    if(level_one ==''){
+      level_one=1;
+    }
+    if(level_two ==''){
+      level_two=1;
+    }
+    if(level_three ==''){
+      level_three=1;
+    }
 
-    if(level_one!='' && level_two!='' && level_three!='' && notes!=''){
+    if(notes!=''){
       this.savebuttonLoader= true;
       this.CollectionService.addAction(level_one,level_two,level_three,notes,collection_id)
       .subscribe(data => {
@@ -214,7 +240,7 @@ export class CollectionComponent {
   }
 
   getCollectionsData(){
-    this.CollectionService.getData()
+      this.CollectionService.getData()
       .subscribe(
         (data) => {
           setTimeout(() => {
@@ -226,7 +252,15 @@ export class CollectionComponent {
       );
   }
 
-  addAmount(data,id){
+  addAmount(data,currentItem){
+    var id = currentItem.id;
+
+    if((Number(data.clamount) + Number(currentItem.collected_amount)) > currentItem.amount ){
+      console.log(data.clamount + currentItem.collected_amount);
+      this.toasterService.pop('error', 'Payment', 'Amount should be less than to total amount');
+      return false;
+    }
+
     if(confirm('Are you sure to add ?')){
 
       console.log(data);
@@ -237,6 +271,7 @@ export class CollectionComponent {
       });
       this.amountaddForm.reset();
       this.amountModal.hide();
+      this.toasterService.pop('success', 'Payment', 'Payment has been added successfully.');
       this.getCollectionsData();
     }
   }  
@@ -287,4 +322,7 @@ export class CollectionComponent {
     })
     console.log('final');
   }
+  
+
+
 }

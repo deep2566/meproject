@@ -31,6 +31,19 @@ export class ClientComissionService {
       );
   }
 
+  deletePayment(id){
+    return this.http.get(environment.apiUrl+'delete-payment/'+id)
+    .pipe(
+      retry(3), // retry a failed request up to 3 times
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
+  addComment(data,invoiceId) { 
+    console.log(data);
+    return this.http.post(environment.apiUrl+'client/add-comment/'+invoiceId,data);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

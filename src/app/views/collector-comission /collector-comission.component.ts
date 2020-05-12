@@ -26,7 +26,7 @@ export class CollectorComissionComponent {
   public currentUser:any; 
 
 
-  constructor(private CollectorComissionService: CollectorComissionService) {
+  constructor(private CollectorComissionService: CollectorComissionService,private toasterService: ToasterService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
       this.CollectorComissionService.getData()
@@ -56,6 +56,20 @@ export class CollectorComissionComponent {
 
   downloadCollection(){
     window.location.href = environment.apiUrl+'download-collector-comission';
+  }
+
+  deletePayment(id) {
+    if(confirm('Are you sure want to delete this payment.?')){
+      this.CollectorComissionService.deletePayment(id)
+      .subscribe(data => {
+        for (let item  of this.data) {
+            if (item.id == id) {
+                this.data.splice(this.data.indexOf(item), 1);
+            }      
+        }
+        this.toasterService.pop('success', 'Payment', 'Payment has been deleted successfully.');
+      });
+    }
   }
 
 

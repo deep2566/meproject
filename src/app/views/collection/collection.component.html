@@ -39,12 +39,12 @@
         <thead>
           <tr>
             <th>
-              <mfDefaultSorter by="name">{{'Collection Id' | translate}}</mfDefaultSorter>
+              <mfDefaultSorter by="id">{{'Collection Id' | translate}}</mfDefaultSorter>
             </th>
             <th>
-              <mfDefaultSorter by="name">{{'Client Name' | translate}}</mfDefaultSorter>
+              <mfDefaultSorter by="client_name">{{'Client Name' | translate}}</mfDefaultSorter>
             </th>
-            <th>
+            <th *ngIf="currentUser.role==1 || currentUser.role==3">
               <mfDefaultSorter by="collector_name">{{'Collector Name' | translate}}</mfDefaultSorter>
             </th>
             <th>
@@ -72,7 +72,7 @@
           <tr *ngFor="let item of mf.data" (click)="setCurrentItem(item)">
             <td>#{{item.id}}</td>
             <td>{{item.client_detail.name}}</td>
-            <td>{{item.collector_detail.name}}</td>
+            <td *ngIf="currentUser.role==1 || currentUser.role==3">{{item.collector_detail.name}}</td>
             <td>{{item.debtor_name}}</td>
             <td>{{item.amount}}</td>
             <td>{{item.amount - item.collected_amount }}</td>
@@ -90,8 +90,15 @@
                 </ul>
               </div>
             </td>
+          </tr>
+
+          <tr>
+            <td colspan="3"><strong>Total Amount: </strong>{{ totalData.totalAmount}}</td>
+            <td colspan="3"><strong>Total Collected Amount: </strong>{{ totalData.totalcollectedAmount}}</td>
+            <td colspan="3"><strong>Total Remaining Amount: </strong>{{ totalData.totalRemainingAmount}}</td>
             
           </tr>
+
         </tbody>
         <tfoot>
           <tr>
@@ -116,7 +123,7 @@
       <div *ngIf="(currentItem | json) != ({} | json)">
 
         <tabset>
-          <tab heading="{{'Debtor Information' | translate}}">
+          <tab heading="{{'Debtor Information' | translate}}" *ngIf="currentUser.role==1 || currentUser.role==3">
             <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
               {{'Add Phone' | translate }}
             </button>
@@ -156,7 +163,7 @@
               </tbody>
             </table>
           </tab>
-          <tab heading="{{'Client Information' | translate}}">
+          <tab heading="{{'Client Information' | translate}}" *ngIf="currentUser.role==1 || currentUser.role==3">
             <table class="table table-bordered">
               <tbody>
                 <tr>
@@ -204,7 +211,7 @@
             </table>
           </tab>
           <tab heading="{{'Attachements' | translate}}">
-            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
+            <button *ngIf="currentUser.role==1 || currentUser.role==3" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="attachModal.show()">
               {{'Add Attachment' | translate }}
             </button>
               <table class="table">
@@ -272,19 +279,19 @@
         <div class="modal-body">
             <div class="form-group">
               <label for="name" class="col-form-label">{{'Level 1' | translate }}</label>
-              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionOne($event.target.value)" [(ngModel)]="level_one" #level1> 
+              <select  [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionOne($event.target.value)" [(ngModel)]="level_one" #level1> 
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="name" class="col-form-label">{{'Level 2' | translate }}</label>
-              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionTwo($event.target.value)" [(ngModel)]="level_two" #level2>
+              <select  [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionTwo($event.target.value)" [(ngModel)]="level_two" #level2>
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="name" class="col-form-label">{{'Level 3' | translate }}</label>
-              <select required [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionThree($event.target.value)" [(ngModel)]="level_three" #level3>
+              <select  [ngModelOptions]="{standalone: true}"  class="form-control" (change)="setOptionThree($event.target.value)" [(ngModel)]="level_three" #level3>
                 <option value="{{item.id}}" *ngFor="let item of actions">{{ item.name}}</option>
               </select>
             </div>
@@ -364,7 +371,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="amountModal.hide()">{{'Close' | translate }}</button>
-          <button [disabled]="amountaddForm.pristine || amountaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addAmount(amountaddForm.value,currentItem.id)" class="btn btn-primary">{{'Add' | translate }}</button>
+          <button [disabled]="amountaddForm.pristine || amountaddForm.invalid" type="submit" [ladda]='savebuttonLoader' (click) = "addAmount(amountaddForm.value,currentItem)" class="btn btn-primary">{{'Add' | translate }}</button>
         </div>
 
       </div>

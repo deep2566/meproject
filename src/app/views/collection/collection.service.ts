@@ -42,6 +42,14 @@ export class CollectionService {
       );
   }
 
+  getTotalDetail() {
+    return this.http.get(this.baseurl+'collection/get-total')
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
 
   addPhone(phone,collection_id){
     const obj = {
