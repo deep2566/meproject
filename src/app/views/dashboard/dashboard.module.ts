@@ -7,6 +7,9 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import {TranslateModule} from '@ngx-translate/core';
+import { DataTableModule } from 'angular2-datatable';
+import { DataFilterPipe } from './datafilterpipe';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -15,9 +18,11 @@ import {TranslateModule} from '@ngx-translate/core';
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    TranslateModule
+    TranslateModule,
+    DataTableModule,
+    CommonModule
   ],
-  declarations: [ DashboardComponent ],
+  declarations: [ DashboardComponent,DataFilterPipe ],
   
 })
 export class DashboardModule { }

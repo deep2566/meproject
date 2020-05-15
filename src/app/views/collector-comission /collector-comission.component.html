@@ -76,9 +76,9 @@
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                   <li role="menuitem">
-                    <a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">
+                    <!-- <a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">
                       {{'Make Invoice' | translate}}
-                    </a>
+                    </a> -->
                     <a class="dropdown-item" (click)="deletePayment(item.id)">
                       {{'Delete Payment' | translate}}
                     </a>

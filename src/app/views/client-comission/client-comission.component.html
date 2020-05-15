@@ -53,6 +53,9 @@
               <mfDefaultSorter by="fee_collect">{{'Collection Fee' | translate}}</mfDefaultSorter>
             </th>
             <th >
+              <mfDefaultSorter by="comments">{{'Comment' | translate}}</mfDefaultSorter>
+            </th>
+            <th >
               <mfDefaultSorter by="fee_collect">{{'Created' | translate}}</mfDefaultSorter>
             </th>
 
@@ -71,6 +74,7 @@
 
             <td>{{item.paid_amount}}</td>
             <td>{{item.fee}}</td>
+            <td>{{item.comments}}</td>
             
             <td>{{item.created}}</td>
            
@@ -80,10 +84,10 @@
                   {{'Action' | translate}}<span class="caret"></span>
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                  <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">{{'Make Invoice' | translate}}</a></li>
-                  <a class="dropdown-item" (click)="deletePayment(item.id)">
+                  <!-- <li role="menuitem"><a class="dropdown-item" [routerLink]="['/invoice-generate', item.collection_id]">{{'Make Invoice' | translate}}</a></li> -->
+                  <!-- <a class="dropdown-item" (click)="deletePayment(item.id)">
                     {{'Delete Payment' | translate}}
-                  </a>
+                  </a> -->
                   <li role="menuitem"><a  class="dropdown-item" data-toggle="modal" (click)="commentModal.show()">{{'Add Comment' | translate }}</a></li>
                 </ul>
               </div>
@@ -116,7 +120,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label class="col-form-label">{{'Comment' | translate }}</label>
-            <textarea   [(ngModel)] = "currentItem.comments" rows="6" type="text" class="form-control" 
+            <textarea  maxlength="150"   [(ngModel)] = "currentItem.comments" rows="6" type="text" class="form-control" 
             formControlName="comment" 
             #comment></textarea>
            

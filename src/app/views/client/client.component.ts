@@ -1,7 +1,8 @@
-import { Component,ViewEncapsulation } from '@angular/core';
+import { Component,ViewEncapsulation,ViewChild } from '@angular/core';
 import { TableData, ClientService } from './client.service';
 import { environment } from '../../../environments/environment';
 import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   templateUrl: 'client.component.html',
@@ -10,6 +11,8 @@ import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster/a
   encapsulation: ViewEncapsulation.None
 })
 export class ClientComponent {
+
+  @ViewChild('dangerModal', {static: false}) public dangerModal: ModalDirective;
 
   public toasterconfig: ToasterConfig =
   new ToasterConfig({
@@ -25,6 +28,8 @@ export class ClientComponent {
   public showChildSpinnner= false;
   public showSpinnner= false;
   public feeSaveloader = false;
+  public currentItem:any;
+  public isLoadingDelete =false;
 
   fields:any =[
     {start_amount:'',end_amount:'',percentage_with_doc_without_legal:'',percentage_without_doc_without_legal:'',percentage_with_legal_with_doc:'',percentage_with_legal_without_doc:''},
@@ -96,6 +101,22 @@ export class ClientComponent {
        }
      );
     //window.alert(JSON.stringify(this.fields));
-    
   }
+
+  setCurrentId(id,item){
+    this.currentId = id;
+    this.currentItem = item; 
+  }
+
+  deleteProduct(id) {
+    this.isLoadingDelete = true;
+    const i = this.currentItem;
+    this.ClientService.delete(id).subscribe(data => {
+    this.isLoadingDelete = false;
+    this.data.splice(this.data.indexOf(i), 1);
+    this.dangerModal.hide();
+    this.toasterService.pop('success', 'Client', 'Client has been deleted successfully.');
+    });
+  }
+
 }

@@ -19,12 +19,21 @@
     
     <div class="card-body">
       <div class="row mb-3" *ngIf="!showSpinnner">
-        <div class="col-md-4 offset-md-8">
+        <div class="col-md-4 offset-md-4">
+          <select class="form-control searchDashboard" id="searchDashboard" >
+            <option value="collector">{{'Collector Name'  | translate}}</option>            
+            <option value="client">{{'Client Name' | translate}}</option>
+            <option value="debtor">{{'Debtor Name' | translate}}</option>
+            <option value="amount">{{'Amount'  | translate}}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+         
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fa fa-search"></i></span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search by Collector Name' | translate}}"/>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Search' | translate}}"/>
           </div>
         </div>
       </div>
@@ -124,8 +133,11 @@
 
         <tabset>
           <tab heading="{{'Debtor Information' | translate}}" *ngIf="currentUser.role==1 || currentUser.role==3">
-            <button *ngIf="currentUser.role==1" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
+            <button *ngIf="currentUser.role==1 || currentUser.role==3" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="primaryModal.show();phoneaddForm.reset()">
               {{'Add Phone' | translate }}
+            </button>
+            <button *ngIf="currentUser.role==1 || currentUser.role==3" type="button" class="btn btn-primary mr-1 " style="margin-bottom: 10px;" data-toggle="modal" (click)="emailModal.show();emailaddForm.reset()">
+              {{'Add Email' | translate }}
             </button>
            
             <table class="table table-bordered">
@@ -137,7 +149,12 @@
                 </tr>
                 <tr>
                   <th>{{'Debtor Email' | translate }} : </th>
-                  <td>{{ currentItem.debtor_email}}</td>
+                  <td>
+                    {{ currentItem.debtor_email}}
+                    <i *ngFor="let item of currentItem.debt_email">
+                      , {{ item.email}}
+                  </i>
+                  </td>
                 </tr>
                 <tr>
                   <th>{{'Debtor Phone' | translate }}:</th>
@@ -260,8 +277,6 @@
 
       </div>
    </form>
-    
-   
   </div>
 </div>
 
@@ -414,6 +429,40 @@
       </div>
    </form>   
    
+  </div>
+</div>
+
+<div bsModal #emailModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <form [formGroup]="emailaddForm" (ngSubmit)="addEmail(email.value,currentItem.id)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{'Add Email' | translate }}</h4>
+          <button type="button" class="close" (click)="emailModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="name" class="col-form-label">{{'Email' | translate }}</label>
+              <input  formControlName="email"  type="email" class="form-control"  
+                #email />
+            </div>
+            <div *ngIf="emailaddForm.controls['email'].invalid && (emailaddForm.controls['email'].dirty || emailaddForm.controls['email'].touched)" class="alert alert-danger">
+              <div *ngIf="emailaddForm.controls['email'].errors.required || emailaddForm.controls['email'].errors.email">
+                {{'Please enter valid email address' | translate }}.
+              </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="emailModal.hide();">{{'Close' | translate }}</button>
+          <button [disabled]="emailaddForm.pristine || emailaddForm.invalid" type="submit" [ladda]='savebuttonLoader' class="btn btn-primary">{{'Save' | translate }}</button>
+        </div>
+
+      </div>
+   </form>
   </div>
 </div>
 

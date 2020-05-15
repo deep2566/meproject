@@ -146,6 +146,14 @@
     "Please upload excel":"Please upload only excel",
     "Invalid Extension":"Invalid Extension",
     "Collector Id":"Collector Id",
-    "Client Id":"Client Id"
-
+    "Client Id":"Client Id",
+    "Are you sure want to delete this collector":"Are you sure want to delete this collector",
+    "Are you sure want to delete this client":"Are you sure want to delete this client",
+    "Collected Info":"Collected Info",
+    "Total Collection (This Month)":"Total Collection (This Month)",
+    "Total Collection":"Total Collection",
+    "Total Portfolio":"Total Portfolio",
+    "Name of Client":"Name of Client",
+    "Search":"Search",
+    "Add Email":"Add Email"
 }

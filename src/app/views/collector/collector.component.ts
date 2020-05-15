@@ -1,6 +1,8 @@
-import { Component,ViewEncapsulation } from '@angular/core';
+import { Component,ViewEncapsulation,ViewChild} from '@angular/core';
 import { TableData, CollectorService } from './collector.service';
 import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
+import { ModalDirective } from 'ngx-bootstrap';
+
 @Component({
   templateUrl: 'collector.component.html',
   styleUrls: ['../../../scss/vendors/toastr/toastr.scss','../../../../node_modules/ladda/dist/ladda-themeless.min.css'],
@@ -8,6 +10,7 @@ import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster/a
   encapsulation: ViewEncapsulation.None
 })
 export class CollectorComponent {
+  @ViewChild('dangerModal', {static: false}) public dangerModal: ModalDirective;
 
   public toasterconfig: ToasterConfig =
   new ToasterConfig({
@@ -35,6 +38,8 @@ export class CollectorComponent {
   public currentId = '';
   public showChildSpinnner= false;
   public feeSaveloader = false;
+  public currentItem:any;
+  public isLoadingDelete =false;
 
   constructor(private toasterService: ToasterService,private CollectorService: CollectorService) {
     this.CollectorService.getData()
@@ -98,8 +103,24 @@ export class CollectorComponent {
          console.log(data);
          this.toasterService.pop('success', 'Collector Fee', 'Collector Fee has been updated successfully.');
        }
-     );
-    //window.alert(JSON.stringify(this.fields));
-    
+     );    
   }
+
+  setCurrentId(id,item){
+    this.currentId = id;
+    this.currentItem = item; 
+  }
+
+  deleteProduct(id) {
+    this.isLoadingDelete = true;
+    const i = this.currentItem;
+    this.CollectorService.delete(id).subscribe(data => {
+    this.isLoadingDelete = false;
+    this.data.splice(this.data.indexOf(i), 1);
+    this.dangerModal.hide();
+    this.toasterService.pop('success', 'Collector', 'Collector has been deleted successfully.');
+    });
+  }
+
+
 }

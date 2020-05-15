@@ -1,50 +1,99 @@
 <div class="animated fadeIn">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i> {{'Collected History' | translate}}
+  <div class="card">
+    <div class="card-header">
+      {{'Collected History' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-4 offset-md-8">          
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+              </div>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
+          </div>
         </div>
-        <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
-            <thead>
-              <tr>
-                <th>{{'Collector Name' | translate}}</th>
-                <th>{{'Amount of Day' | translate}}</th>
-                <th>{{'Amount of Month' | translate}}</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{'How are you' | translate}}</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>{{'Wahab' | translate}}</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-
-            </tbody>
-          </table>
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">{{'Prev' | translate}}</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">{{'Next' | translate}}</a></li>
-            </ul>
-          </nav>
+      </div>
+      <table class="table table-bordered table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th>
+              <mfDefaultSorter by="collector_name">{{'Collector Name' | translate}}</mfDefaultSorter>
+            </th>
+            <th >
+              <mfDefaultSorter by="email">{{'Amount of Day' | translate}}</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="age">{{'Amount of Month' | translate}}</mfDefaultSorter>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data">
+            <td>{{ item.name}}</td>
+            <td>{{ item.today_amount}}</td>
+            <td >{{ item.month_amount}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    {{'Collected Info' | translate}}:     
+  </div>
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-4 offset-md-8">          
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+          <input type="text" class="form-control" placeholder="Search by name"/>
         </div>
       </div>
     </div>
-    <!--/.col-->
+    <table class="table table-bordered table-hover table-responsive-lg" [mfData]="client | dataFilter : filterQuery" #mf2="mfDataTable" [mfRowsOnPage]="10">
+      <thead>
+        <tr>
+          <th>
+            <mfDefaultSorter by="client_name">{{'Name of Client' | translate}}</mfDefaultSorter>
+          </th>
+          <th >
+            <mfDefaultSorter by="email">{{'Total Portfolio' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="age">{{'Total Collection' | translate}}</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="age">{{'Total Collection (This Month)' | translate}}</mfDefaultSorter>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mf2.client">
+          <td>{{ item}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
-  <!--/.row-->
 </div>
+

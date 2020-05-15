@@ -63,7 +63,12 @@
             <td>{{item.username}}</td>
             <td>{{item.phone}}</td>
             <td>{{ item.address}}</td>
-            <td><a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a></td>
+            <td>
+              <button (click)="dangerModal.show(); setCurrentId(item.id,item)" class="btn btn-danger btn-sm mr-1" data-toggle="modal" type="button">
+                {{'Delete' | translate}}
+              </button>
+              <a [routerLink]="['edit', item.id]" class="btn btn-sm btn-primary active">{{'Edit' | translate}}</a>
+            </td>
           </tr>
         </tbody>
         <tfoot>
@@ -141,3 +146,23 @@
     </div>
   </div>
 </div>
+
+<div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'Delete User' | translate}}</h4>
+        <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{'Are you sure want to delete this client?' | translate}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">{{'No' | translate}}</button>
+        <button (click) = "deleteProduct(currentId)" type="button" class="btn btn-danger btn-ladda" [ladda]='isLoadingDelete'>{{'Yes' | translate}}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -16,6 +16,7 @@ import { LaddaModule } from 'angular2-ladda';
 import { ClientAddModule } from './client-add/client-add.module';
 import { ClientEditModule } from './client-edit/collector-edit.module';
 import { TokenInterceptor } from '../../token.interceptor';
+import { ModalModule } from 'ngx-bootstrap';
 //
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -31,7 +32,8 @@ import { TranslateModule } from '@ngx-translate/core';
     LaddaModule,
     ClientAddModule,
     ClientEditModule,
-    TranslateModule
+    TranslateModule,
+    ModalModule.forRoot(),
   ],
   declarations: [
     ClientComponent,

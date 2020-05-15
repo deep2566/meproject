@@ -18,6 +18,7 @@ import { CollectionAddModule } from './collection-add/collection-add.module';
 import { CollectionEditModule } from './collection-edit/collection-edit.module';
 import { TokenInterceptor } from '../../token.interceptor';
 import { TranslateModule } from '@ngx-translate/core';
+
 //
 @NgModule({
   imports: [

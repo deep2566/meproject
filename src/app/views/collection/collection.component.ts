@@ -30,6 +30,7 @@ export class CollectionComponent {
   @ViewChild('attachModal', {static: false}) public attachModal: ModalDirective;
   @ViewChild('amountModal', {static: false}) public amountModal: ModalDirective;
   @ViewChild('importModal', {static: false}) public importModal: ModalDirective;
+  @ViewChild('emailModal', {static: false}) public emailModal: ModalDirective;
  
   error: any;
   public data: any;
@@ -56,6 +57,7 @@ export class CollectionComponent {
   amountaddForm: FormGroup;
   phoneaddForm:FormGroup;
   importCollectionForm:FormGroup;
+  emailaddForm:FormGroup;
 
   constructor(private alertService: AlertService, private router: Router,public fb: FormBuilder,private toasterService: ToasterService,private CollectionService: CollectionService) {
       this.CollectionService.getData()
@@ -98,6 +100,10 @@ export class CollectionComponent {
       this.phoneaddForm = this.fb.group({
         phone: ['', Validators.required ]
       })
+
+      this.emailaddForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email ]]
+      })
 	  
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     
@@ -130,8 +136,7 @@ export class CollectionComponent {
     }
   }
 
-  addPhone(phone,collection_id) {
-    
+  addPhone(phone,collection_id) {    
     this.savebuttonLoader= true;
     this.CollectionService.addPhone(phone,collection_id)
     .subscribe(data => {
@@ -321,6 +326,18 @@ export class CollectionComponent {
       });
     })
     console.log('final');
+  }
+
+  addEmail(email,collection_id) {    
+    this.savebuttonLoader= true;
+    this.CollectionService.addEmail(email,collection_id)
+    .subscribe(data => {
+      this.phoneaddForm.reset();
+      this.savebuttonLoader= false;
+      this.currentItem = data;
+      this.emailModal.hide();
+      this.toasterService.pop('success', 'Email', 'Email has been added successfully.');
+    });
   }
   
 

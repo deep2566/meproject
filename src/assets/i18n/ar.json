@@ -153,5 +153,15 @@
     "Please upload excel":"يرجى تحميل التفوق",
     "Invalid Extension":"ملحق غير صالح",
     "Collector Id":"معرف جامع",
-    "Client Id":"معرف العميل"
+    "Client Id":"معرف العميل",
+    "Are you sure want to delete this collector":"هل تريد بالتأكيد حذف هذا المجمع",
+    "Are you sure want to delete this client":"هل تريد بالتأكيد حذف هذا العميل",
+    "Collected Info":"المعلومات التي تم جمعها",
+    "Total Collection (This Month)":"مجموع المجموعة (هذا الشهر)",
+    "Total Collection":"مجموع المجموعة",
+    "Total Portfolio":"إجمالي المحفظة",
+    "Name of Client":"اسم العميل",
+    "Search":"بحث",
+    "Add Email":"أضف بريدًا إلكترونيً"
+
 }

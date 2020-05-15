@@ -61,6 +61,16 @@ export class CollectionService {
     );
   }
 
+  addEmail(email,collection_id){
+    const obj = {
+      email,collection_id
+    };
+    return this.http.post(`${this.uri}/addemail`, obj).pipe(
+      retry(3), // retry a failed request up to 3 times
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
   addAction(level_one,level_two,level_three,notes,collection_id){
     const obj = {
       level_one,level_two,level_three,notes,collection_id
